@@ -5,7 +5,7 @@ class SecureStorageAccess {
 
   const SecureStorageAccess();
 
-  Future<void> set(String key, String value) async {
+  Future<void> set(String key, String? value) async {
     await _secureStorage.write(key: key, value: value);
   }
 

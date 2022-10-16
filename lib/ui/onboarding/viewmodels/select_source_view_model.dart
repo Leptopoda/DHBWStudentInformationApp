@@ -23,7 +23,7 @@ class SelectSourceViewModel extends OnboardingStepViewModel {
 
   @override
   Future<void> save() async {
-    await _preferencesProvider.setScheduleSourceType(scheduleSourceType.index);
+    await _preferencesProvider.setScheduleSourceType(scheduleSourceType);
   }
 
   String? nextStep() {

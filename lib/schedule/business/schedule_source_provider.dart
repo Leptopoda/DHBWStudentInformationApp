@@ -44,7 +44,8 @@ class ScheduleSourceProvider {
   );
 
   Future<bool> setupScheduleSource() async {
-    final scheduleSourceType = await _getScheduleSourceType();
+    final scheduleSourceType =
+        await _preferencesProvider.getScheduleSourceType();
 
     ScheduleSource scheduleSource = const InvalidScheduleSource();
 
@@ -68,12 +69,6 @@ class ScheduleSourceProvider {
     }
 
     return success;
-  }
-
-  Future<ScheduleSourceType> _getScheduleSourceType() async {
-    final type = await _preferencesProvider.getScheduleSourceType();
-
-    return ScheduleSourceType.values[type];
   }
 
   Future<ScheduleSource> _dualisScheduleSource() async {
@@ -130,8 +125,7 @@ class ScheduleSourceProvider {
     if (url == null) return;
 
     await _preferencesProvider.setRaplaUrl(url);
-    await _preferencesProvider
-        .setScheduleSourceType(ScheduleSourceType.rapla.index);
+    await _preferencesProvider.setScheduleSourceType(ScheduleSourceType.rapla);
 
     await _clearEntryCache();
     await setupScheduleSource();
@@ -143,8 +137,7 @@ class ScheduleSourceProvider {
   }
 
   Future<void> setupForDualis() async {
-    await _preferencesProvider
-        .setScheduleSourceType(ScheduleSourceType.dualis.index);
+    await _preferencesProvider.setScheduleSourceType(ScheduleSourceType.dualis);
 
     await _clearEntryCache();
     await setupScheduleSource();
@@ -159,8 +152,7 @@ class ScheduleSourceProvider {
     if (url == null) return;
 
     await _preferencesProvider.setIcalUrl(url);
-    await _preferencesProvider
-        .setScheduleSourceType(ScheduleSourceType.ical.index);
+    await _preferencesProvider.setScheduleSourceType(ScheduleSourceType.ical);
 
     await _clearEntryCache();
     await setupScheduleSource();
@@ -176,7 +168,7 @@ class ScheduleSourceProvider {
     await _preferencesProvider.setMannheimScheduleId(selectedCourse.scheduleId);
     await _preferencesProvider.setIcalUrl(selectedCourse.icalUrl);
     await _preferencesProvider
-        .setScheduleSourceType(ScheduleSourceType.mannheim.index);
+        .setScheduleSourceType(ScheduleSourceType.mannheim);
 
     await _clearEntryCache();
     await setupScheduleSource();

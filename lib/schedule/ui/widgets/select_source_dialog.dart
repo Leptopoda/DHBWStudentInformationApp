@@ -18,8 +18,7 @@ class SelectSourceDialog {
   SelectSourceDialog(this._preferencesProvider, this._scheduleSourceProvider);
 
   Future show(BuildContext context) async {
-    final type = await _preferencesProvider.getScheduleSourceType();
-    _currentScheduleSource = ScheduleSourceType.values[type];
+    _currentScheduleSource = await _preferencesProvider.getScheduleSourceType();
 
     await showDialog(
       context: context,
@@ -78,7 +77,7 @@ class SelectSourceDialog {
   ) async {
     if (type == null) return;
     // TODO: [Leptopoda] only switch the type when the setup is completed.
-    _preferencesProvider.setScheduleSourceType(type.index);
+    _preferencesProvider.setScheduleSourceType(type);
 
     Navigator.of(context).pop();
 

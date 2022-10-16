@@ -4,6 +4,7 @@ import 'package:dhbwstudentapp/common/data/preferences/preferences_access.dart';
 import 'package:dhbwstudentapp/common/data/preferences/secure_storage_access.dart';
 import 'package:dhbwstudentapp/date_management/data/calendar_access.dart';
 import 'package:dhbwstudentapp/dualis/model/credentials.dart';
+import 'package:dhbwstudentapp/schedule/model/schedule_source_type.dart';
 import 'package:flutter/material.dart';
 
 class PreferencesProvider {
@@ -150,8 +151,8 @@ class PreferencesProvider {
   }
 
   Future<void> clearDualisCredentials() async {
-    await _secureStorageAccess.set(dualisUsername, "");
-    await _secureStorageAccess.set(dualisPassword, "");
+    await _secureStorageAccess.set(dualisUsername, null);
+    await _secureStorageAccess.set(dualisPassword, null);
   }
 
   Future<bool> getStoreDualisCredentials() async {
@@ -175,11 +176,8 @@ class PreferencesProvider {
     return _preferencesAccess.get<String>(lastViewedDateEntryDatabase);
   }
 
-  Future<void> setLastViewedDateEntryDatabase(String? value) async {
-    await _preferencesAccess.set<String>(
-      lastViewedDateEntryDatabase,
-      value ?? "",
-    );
+  Future<void> setLastViewedDateEntryDatabase(String value) async {
+    await _preferencesAccess.set<String>(lastViewedDateEntryDatabase, value);
   }
 
   Future<String?> getLastViewedDateEntryYear() async {
@@ -191,12 +189,17 @@ class PreferencesProvider {
     await _preferencesAccess.set<String>(lastViewedDateEntryYear, value);
   }
 
-  Future<int> getScheduleSourceType() async {
-    return await _preferencesAccess.get<int>(scheduleSourceType) ?? 0;
+  Future<ScheduleSourceType> getScheduleSourceType() async {
+    final type = await _preferencesAccess.get<int>(scheduleSourceType);
+
+    if (type == null) {
+      return ScheduleSourceType.none;
+    }
+    return ScheduleSourceType.values[type];
   }
 
-  Future<void> setScheduleSourceType(int value) async {
-    await _preferencesAccess.set<int>(scheduleSourceType, value);
+  Future<void> setScheduleSourceType(ScheduleSourceType type) async {
+    await _preferencesAccess.set<int>(scheduleSourceType, type.index);
   }
 
   Future<String?> getIcalUrl() {

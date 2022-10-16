@@ -85,7 +85,7 @@ class StudyGradesViewModel extends BaseViewModel {
     // When the schedule source is Dualis the login credentials should not be
     // cleared
     if (await _preferencesProvider.getScheduleSourceType() ==
-        ScheduleSourceType.dualis.index) {
+        ScheduleSourceType.dualis) {
       return;
     }
 

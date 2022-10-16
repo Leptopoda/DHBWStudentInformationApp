@@ -164,7 +164,8 @@ class DateManagementViewModel extends BaseViewModel {
     _currentDateDatabase = database;
     notifyListeners("currentDateDatabase");
 
-    _preferencesProvider.setLastViewedDateEntryDatabase(database?.id);
+    if (database == null) return;
+    _preferencesProvider.setLastViewedDateEntryDatabase(database.id);
   }
 
   set currentSelectedYear(String? year) {
