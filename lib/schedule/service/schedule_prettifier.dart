@@ -39,7 +39,7 @@ class SchedulePrettifier {
       return entry;
     }
 
-    const type = ScheduleEntryType.Online;
+    const type = ScheduleEntryType.online;
 
     return entry.copyWith(title: newTitle, type: type);
   }

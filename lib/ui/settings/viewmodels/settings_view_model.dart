@@ -50,7 +50,7 @@ class SettingsViewModel extends BaseViewModel {
     _loadPreferences();
 
     _inAppPurchaseManager.addPurchaseCallback(
-      InAppPurchaseHelper.WidgetProductId,
+      InAppPurchaseHelper.widgetProductId,
       _widgetPurchaseCallback,
     );
   }
@@ -71,8 +71,8 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   void _widgetPurchaseCallback(String? id, PurchaseResultEnum result) {
-    if (result == PurchaseResultEnum.Success) {
-      _widgetPurchaseState = PurchaseStateEnum.Purchased;
+    if (result == PurchaseResultEnum.success) {
+      _widgetPurchaseState = PurchaseStateEnum.purchased;
     }
     notifyListeners("didPurchaseWidget");
   }
@@ -127,7 +127,7 @@ class SettingsViewModel extends BaseViewModel {
   }
 
   Future<void> purchaseWidgets() async {
-    if (_widgetPurchaseState != PurchaseStateEnum.Purchased) {
+    if (_widgetPurchaseState != PurchaseStateEnum.purchased) {
       await _inAppPurchaseManager.buyWidget();
     }
   }
@@ -141,7 +141,7 @@ class SettingsViewModel extends BaseViewModel {
     super.dispose();
 
     _inAppPurchaseManager.removePurchaseCallback(
-      InAppPurchaseHelper.WidgetProductId,
+      InAppPurchaseHelper.widgetProductId,
       _widgetPurchaseCallback,
     );
   }

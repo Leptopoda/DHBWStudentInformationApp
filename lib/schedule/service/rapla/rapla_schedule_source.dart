@@ -212,9 +212,9 @@ class RaplaScheduleSource extends ScheduleSource {
 }
 
 enum FailureReason {
-  Success,
-  RequestError,
-  ParseError;
+  success,
+  requestError,
+  parseError;
 }
 
 // TODO: [Leptopoda] make enum
@@ -224,18 +224,18 @@ class ScheduleOrFailure {
   final Object? exception;
   final StackTrace? trace;
 
-  bool get success => reason == FailureReason.Success;
+  bool get success => reason == FailureReason.success;
 
   const ScheduleOrFailure.success(this.schedule)
-      : reason = FailureReason.Success,
+      : reason = FailureReason.success,
         exception = null,
         trace = null;
 
   const ScheduleOrFailure.failParseError(this.exception, this.trace)
-      : reason = FailureReason.ParseError,
+      : reason = FailureReason.parseError,
         schedule = null;
 
   const ScheduleOrFailure.failRequestError(this.exception, this.trace)
-      : reason = FailureReason.RequestError,
+      : reason = FailureReason.requestError,
         schedule = null;
 }

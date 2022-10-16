@@ -17,7 +17,7 @@ class WidgetHelpDialog {
     if (!PlatformUtil.isAndroid()) return;
     if (await _preferencesProvider.getDidShowWidgetHelpDialog()) return;
 
-    if (_appLaunchCounter >= WidgetHelpLaunchAfter) {
+    if (_appLaunchCounter >= widgetHelpLaunchAfter) {
       await _preferencesProvider.setDidShowWidgetHelpDialog(true);
       await _showDialog(context);
     }

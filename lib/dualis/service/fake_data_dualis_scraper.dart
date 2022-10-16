@@ -33,7 +33,7 @@ class FakeDataDualisScraper implements DualisScraper {
         "Informatik",
         "1.0",
         "10",
-        ExamState.Passed,
+        ExamState.passed,
         "",
       ),
     ]);
@@ -77,7 +77,7 @@ class FakeDataDualisScraper implements DualisScraper {
         "Informatik",
         "1.0",
         "10",
-        ExamState.Passed,
+        ExamState.passed,
         "",
       ),
     ]);
@@ -113,7 +113,7 @@ class FakeDataDualisScraper implements DualisScraper {
   ) async {
     await Future.delayed(const Duration(milliseconds: 200));
     _isLoggedIn = true;
-    return Future.value(LoginResult.LoggedIn);
+    return Future.value(LoginResult.loggedIn);
   }
 
   @override
@@ -122,7 +122,7 @@ class FakeDataDualisScraper implements DualisScraper {
   ) async {
     await Future.delayed(const Duration(milliseconds: 200));
     _isLoggedIn = true;
-    return Future.value(LoginResult.LoggedIn);
+    return Future.value(LoginResult.loggedIn);
   }
 
   @override

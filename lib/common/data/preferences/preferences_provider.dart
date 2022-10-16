@@ -7,27 +7,27 @@ import 'package:dhbwstudentapp/dualis/model/credentials.dart';
 import 'package:flutter/material.dart';
 
 class PreferencesProvider {
-  static const String AppThemeKey = "AppTheme";
-  static const String RaplaUrlKey = "RaplaUrl";
-  static const String IsFirstStartKey = "IsFirstStart";
-  static const String LastUsedLanguageCode = "LastUsedLanguageCode";
-  static const String NotifyAboutNextDay = "NotifyAboutNextDay";
-  static const String NotifyAboutScheduleChanges = "NotifyAboutScheduleChanges";
-  static const String RateInStoreLaunchCountdown = "RateInStoreLaunchCountdown";
-  static const String DontShowRateNowDialog = "RateNeverButtonPressed";
-  static const String DualisStoreCredentials = "StoreDualisCredentials";
-  static const String DualisUsername = "DualisUsername";
-  static const String DualisPassword = "DualisPassword";
-  static const String LastViewedSemester = "LastViewedSemester";
-  static const String LastViewedDateEntryDatabase =
+  static const String appThemeKey = "AppTheme";
+  static const String raplaUrlKey = "RaplaUrl";
+  static const String isFirstStartKey = "IsFirstStart";
+  static const String lastUsedLanguageCode = "LastUsedLanguageCode";
+  static const String notifyAboutNextDay = "NotifyAboutNextDay";
+  static const String notifyAboutScheduleChanges = "NotifyAboutScheduleChanges";
+  static const String rateInStoreLaunchCountdown = "RateInStoreLaunchCountdown";
+  static const String dontShowRateNowDialog = "RateNeverButtonPressed";
+  static const String dualisStoreCredentials = "StoreDualisCredentials";
+  static const String dualisUsername = "DualisUsername";
+  static const String dualisPassword = "DualisPassword";
+  static const String lastViewedSemester = "LastViewedSemester";
+  static const String lastViewedDateEntryDatabase =
       "LastViewedDateEntryDatabase";
-  static const String LastViewedDateEntryYear = "LastViewedDateEntryYear";
-  static const String ScheduleSourceType = "ScheduleSourceType";
-  static const String ScheduleIcalUrl = "ScheduleIcalUrl";
-  static const String MannheimScheduleId = "MannheimScheduleId";
-  static const String PrettifySchedule = "PrettifySchedule";
-  static const String DidShowWidgetHelpDialog = "DidShowWidgetHelpDialog";
-  static const String SynchronizeScheduleWithCalendar =
+  static const String lastViewedDateEntryYear = "LastViewedDateEntryYear";
+  static const String scheduleSourceType = "ScheduleSourceType";
+  static const String scheduleIcalUrl = "ScheduleIcalUrl";
+  static const String mannheimScheduleId = "MannheimScheduleId";
+  static const String prettifySchedule = "PrettifySchedule";
+  static const String didShowWidgetHelpDialog = "DidShowWidgetHelpDialog";
+  static const String synchronizeScheduleWithCalendar =
       "SynchronizeScheduleWithCalendar";
 
   final PreferencesAccess _preferencesAccess;
@@ -36,7 +36,7 @@ class PreferencesProvider {
   const PreferencesProvider(this._preferencesAccess, this._secureStorageAccess);
 
   Future<ThemeMode> appTheme() async {
-    final theme = await _preferencesAccess.get<String>(AppThemeKey);
+    final theme = await _preferencesAccess.get<String>(appThemeKey);
     final themeName = theme?.toLowerCase();
 
     return ThemeMode.values.firstWhere(
@@ -48,7 +48,7 @@ class PreferencesProvider {
   }
 
   Future<void> setAppTheme(ThemeMode value) async {
-    await _preferencesAccess.set<String>(AppThemeKey, value.name);
+    await _preferencesAccess.set<String>(appThemeKey, value.name);
   }
 
   Future<void> setIsCalendarSyncEnabled(bool value) async {
@@ -85,62 +85,62 @@ class PreferencesProvider {
   }
 
   Future<String> getRaplaUrl() async {
-    return await _preferencesAccess.get<String>(RaplaUrlKey) ?? "";
+    return await _preferencesAccess.get<String>(raplaUrlKey) ?? "";
   }
 
   Future<void> setRaplaUrl(String url) async {
-    await _preferencesAccess.set<String>(RaplaUrlKey, url);
+    await _preferencesAccess.set<String>(raplaUrlKey, url);
   }
 
   Future<bool> isFirstStart() async {
-    return await _preferencesAccess.get<bool>(IsFirstStartKey) ?? true;
+    return await _preferencesAccess.get<bool>(isFirstStartKey) ?? true;
   }
 
   Future<void> setIsFirstStart(bool isFirstStart) async {
-    await _preferencesAccess.set<bool>(IsFirstStartKey, isFirstStart);
+    await _preferencesAccess.set<bool>(isFirstStartKey, isFirstStart);
   }
 
   Future<String?> getLastUsedLanguageCode() async {
-    return _preferencesAccess.get<String>(LastUsedLanguageCode);
+    return _preferencesAccess.get<String>(lastUsedLanguageCode);
   }
 
   Future<void> setLastUsedLanguageCode(String languageCode) async {
-    await _preferencesAccess.set<String>(LastUsedLanguageCode, languageCode);
+    await _preferencesAccess.set<String>(lastUsedLanguageCode, languageCode);
   }
 
   Future<bool> getNotifyAboutNextDay() async {
-    return await _preferencesAccess.get<bool>(NotifyAboutNextDay) ?? true;
+    return await _preferencesAccess.get<bool>(notifyAboutNextDay) ?? true;
   }
 
   Future<void> setNotifyAboutNextDay(bool value) async {
-    await _preferencesAccess.set<bool>(NotifyAboutNextDay, value);
+    await _preferencesAccess.set<bool>(notifyAboutNextDay, value);
   }
 
   Future<bool> getNotifyAboutScheduleChanges() async {
-    return await _preferencesAccess.get<bool>(NotifyAboutScheduleChanges) ??
+    return await _preferencesAccess.get<bool>(notifyAboutScheduleChanges) ??
         true;
   }
 
   Future<void> setNotifyAboutScheduleChanges(bool value) async {
-    await _preferencesAccess.set<bool>(NotifyAboutScheduleChanges, value);
+    await _preferencesAccess.set<bool>(notifyAboutScheduleChanges, value);
   }
 
   Future<bool> getDontShowRateNowDialog() async {
-    return await _preferencesAccess.get<bool>(DontShowRateNowDialog) ?? false;
+    return await _preferencesAccess.get<bool>(dontShowRateNowDialog) ?? false;
   }
 
   Future<void> setDontShowRateNowDialog(bool value) async {
-    await _preferencesAccess.set<bool>(DontShowRateNowDialog, value);
+    await _preferencesAccess.set<bool>(dontShowRateNowDialog, value);
   }
 
   Future<void> storeDualisCredentials(Credentials credentials) async {
-    await _secureStorageAccess.set(DualisUsername, credentials.username);
-    await _secureStorageAccess.set(DualisPassword, credentials.password);
+    await _secureStorageAccess.set(dualisUsername, credentials.username);
+    await _secureStorageAccess.set(dualisPassword, credentials.password);
   }
 
   Future<Credentials?> loadDualisCredentials() async {
-    final username = await _secureStorageAccess.get(DualisUsername);
-    final password = await _secureStorageAccess.get(DualisPassword);
+    final username = await _secureStorageAccess.get(dualisUsername);
+    final password = await _secureStorageAccess.get(dualisPassword);
 
     if (username == null ||
         password == null ||
@@ -150,98 +150,95 @@ class PreferencesProvider {
   }
 
   Future<void> clearDualisCredentials() async {
-    await _secureStorageAccess.set(DualisUsername, "");
-    await _secureStorageAccess.set(DualisPassword, "");
+    await _secureStorageAccess.set(dualisUsername, "");
+    await _secureStorageAccess.set(dualisPassword, "");
   }
 
   Future<bool> getStoreDualisCredentials() async {
-    return await _preferencesAccess.get<bool>(DualisStoreCredentials) ?? false;
+    return await _preferencesAccess.get<bool>(dualisStoreCredentials) ?? false;
   }
 
   Future<void> setStoreDualisCredentials(bool value) async {
-    await _preferencesAccess.set<bool>(DualisStoreCredentials, value);
+    await _preferencesAccess.set<bool>(dualisStoreCredentials, value);
   }
 
   Future<String?> getLastViewedSemester() async {
-    return _preferencesAccess.get<String>(LastViewedSemester);
+    return _preferencesAccess.get<String>(lastViewedSemester);
   }
 
-  Future<void> setLastViewedSemester(String? lastViewedSemester) async {
-    if (lastViewedSemester == null) return;
-    await _preferencesAccess.set<String>(
-      LastViewedSemester,
-      lastViewedSemester,
-    );
+  Future<void> setLastViewedSemester(String? semester) async {
+    if (semester == null) return;
+    await _preferencesAccess.set<String>(lastViewedSemester, semester);
   }
 
   Future<String?> getLastViewedDateEntryDatabase() async {
-    return _preferencesAccess.get<String>(LastViewedDateEntryDatabase);
+    return _preferencesAccess.get<String>(lastViewedDateEntryDatabase);
   }
 
   Future<void> setLastViewedDateEntryDatabase(String? value) async {
     await _preferencesAccess.set<String>(
-      LastViewedDateEntryDatabase,
+      lastViewedDateEntryDatabase,
       value ?? "",
     );
   }
 
   Future<String?> getLastViewedDateEntryYear() async {
-    return _preferencesAccess.get<String>(LastViewedDateEntryYear);
+    return _preferencesAccess.get<String>(lastViewedDateEntryYear);
   }
 
   Future<void> setLastViewedDateEntryYear(String? value) async {
     if (value == null) return;
-    await _preferencesAccess.set<String>(LastViewedDateEntryYear, value);
+    await _preferencesAccess.set<String>(lastViewedDateEntryYear, value);
   }
 
   Future<int> getScheduleSourceType() async {
-    return await _preferencesAccess.get<int>(ScheduleSourceType) ?? 0;
+    return await _preferencesAccess.get<int>(scheduleSourceType) ?? 0;
   }
 
   Future<void> setScheduleSourceType(int value) async {
-    await _preferencesAccess.set<int>(ScheduleSourceType, value);
+    await _preferencesAccess.set<int>(scheduleSourceType, value);
   }
 
   Future<String?> getIcalUrl() {
-    return _preferencesAccess.get<String>(ScheduleIcalUrl);
+    return _preferencesAccess.get<String>(scheduleIcalUrl);
   }
 
   Future<void> setIcalUrl(String url) {
-    return _preferencesAccess.set<String>(ScheduleIcalUrl, url);
+    return _preferencesAccess.set<String>(scheduleIcalUrl, url);
   }
 
   Future<String?> getMannheimScheduleId() {
-    return _preferencesAccess.get<String>(MannheimScheduleId);
+    return _preferencesAccess.get<String>(mannheimScheduleId);
   }
 
   Future<void> setMannheimScheduleId(String url) {
-    return _preferencesAccess.set<String>(MannheimScheduleId, url);
+    return _preferencesAccess.set<String>(mannheimScheduleId, url);
   }
 
   Future<bool> getPrettifySchedule() async {
-    return await _preferencesAccess.get<bool>(PrettifySchedule) ?? true;
+    return await _preferencesAccess.get<bool>(prettifySchedule) ?? true;
   }
 
   Future<void> setPrettifySchedule(bool value) {
-    return _preferencesAccess.set<bool>(PrettifySchedule, value);
+    return _preferencesAccess.set<bool>(prettifySchedule, value);
   }
 
   Future<bool> getSynchronizeScheduleWithCalendar() async {
     return await _preferencesAccess
-            .get<bool>(SynchronizeScheduleWithCalendar) ??
+            .get<bool>(synchronizeScheduleWithCalendar) ??
         true;
   }
 
   Future<void> setSynchronizeScheduleWithCalendar(bool value) {
-    return _preferencesAccess.set<bool>(SynchronizeScheduleWithCalendar, value);
+    return _preferencesAccess.set<bool>(synchronizeScheduleWithCalendar, value);
   }
 
   Future<bool> getDidShowWidgetHelpDialog() async {
-    return await _preferencesAccess.get<bool>(DidShowWidgetHelpDialog) ?? false;
+    return await _preferencesAccess.get<bool>(didShowWidgetHelpDialog) ?? false;
   }
 
   Future<void> setDidShowWidgetHelpDialog(bool value) {
-    return _preferencesAccess.set<bool>(DidShowWidgetHelpDialog, value);
+    return _preferencesAccess.set<bool>(didShowWidgetHelpDialog, value);
   }
 
   Future<void> set<T>(String key, T value) async {
@@ -263,7 +260,7 @@ class PreferencesProvider {
 
   Future<int> getNextRateInStoreLaunchCount() async {
     return await _preferencesAccess.get<int>("NextRateInStoreLaunchCount") ??
-        RateInStoreLaunchAfter;
+        rateInStoreLaunchAfter;
   }
 
   Future<void> setNextRateInStoreLaunchCount(int value) async {

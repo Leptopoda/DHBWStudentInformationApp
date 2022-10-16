@@ -37,10 +37,10 @@ abstract class DualisService {
 }
 
 enum LoginResult {
-  LoggedOut,
-  LoggedIn,
-  WrongCredentials,
-  LoginFailed,
+  loggedOut,
+  loggedIn,
+  wrongCredentials,
+  loginFailed,
 }
 
 class DualisServiceImpl extends DualisService {
@@ -128,7 +128,7 @@ class DualisServiceImpl extends DualisService {
               (exam) => Exam(
                 exam.name,
                 exam.grade,
-                ExamState.Failed,
+                ExamState.failed,
                 exam.semester,
               ),
             )

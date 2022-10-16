@@ -6,26 +6,26 @@ import 'package:intl/intl.dart';
 class RaplaParsingUtils {
   const RaplaParsingUtils();
 
-  static const String WEEK_BLOCK_CLASS = "week_block";
-  static const String TOOLTIP_CLASS = "tooltip";
-  static const String INFOTABLE_CLASS = "infotable";
-  static const String RESOURCE_CLASS = "resource";
-  static const String LABEL_CLASS = "label";
-  static const String VALUE_CLASS = "value";
-  static const String CLASS_NAME_LABEL = "Veranstaltungsname:";
-  static const String CLASS_NAME_LABEL_ALTERNATIVE = "Name:";
-  static const String CLASS_TITLE_LABEL = "Titel:";
-  static const String PROFESSOR_NAME_LABEL = "Personen:";
-  static const String DETAILS_LABEL = "Bemerkung:";
-  static const String RESOURCES_LABEL = "Ressourcen:";
+  static const String weekBlockClass = "week_block";
+  static const String tooltipClasss = "tooltip";
+  static const String infotableClass = "infotable";
+  static const String resourceClass = "resource";
+  static const String labelClass = "label";
+  static const String valueClass = "value";
+  static const String classNameLabel = "Veranstaltungsname:";
+  static const String classNameLabelAlternative = "Name:";
+  static const String classTitleLabel = "Titel:";
+  static const String professorNameLabel = "Personen:";
+  static const String detailsLabel = "Bemerkung:";
+  static const String resourcesLabel = "Ressourcen:";
 
   static const Map<String, ScheduleEntryType> entryTypeMapping = {
-    "Feiertag": ScheduleEntryType.PublicHoliday,
-    "Online-Format (ohne Raumbelegung)": ScheduleEntryType.Online,
-    "Vorlesung / Lehrbetrieb": ScheduleEntryType.Lesson,
-    "Lehrveranstaltung": ScheduleEntryType.Lesson,
-    "Klausur / Prüfung": ScheduleEntryType.Exam,
-    "Prüfung": ScheduleEntryType.Exam
+    "Feiertag": ScheduleEntryType.publicHoliday,
+    "Online-Format (ohne Raumbelegung)": ScheduleEntryType.online,
+    "Vorlesung / Lehrbetrieb": ScheduleEntryType.lesson,
+    "Lehrveranstaltung": ScheduleEntryType.lesson,
+    "Klausur / Prüfung": ScheduleEntryType.exam,
+    "Prüfung": ScheduleEntryType.exam
   };
 
   static ScheduleEntry extractScheduleEntryOrThrow(
@@ -33,7 +33,7 @@ class RaplaParsingUtils {
     DateTime date,
   ) {
     // The tooltip tag contains the most relevant information
-    final tooltip = value.getElementsByClassName(TOOLTIP_CLASS);
+    final tooltip = value.getElementsByClassName(tooltipClasss);
 
     // The only reliable way to extract the time
     final timeAndClassName = value.getElementsByTagName("a");
@@ -101,7 +101,7 @@ class RaplaParsingUtils {
     DateTime start,
     DateTime end,
   ) {
-    final infotable = tooltip[0].getElementsByClassName(INFOTABLE_CLASS);
+    final infotable = tooltip[0].getElementsByClassName(infotableClass);
 
     if (infotable.isEmpty) {
       throw ElementNotFoundParseException("infotable container");
@@ -109,13 +109,13 @@ class RaplaParsingUtils {
 
     final Map<String, String> properties = _parsePropertiesTable(infotable[0]);
     final type = _extractEntryType(tooltip);
-    final title = properties[CLASS_NAME_LABEL] ??
-        properties[CLASS_TITLE_LABEL] ??
-        properties[CLASS_NAME_LABEL_ALTERNATIVE];
+    final title = properties[classNameLabel] ??
+        properties[classTitleLabel] ??
+        properties[classNameLabelAlternative];
 
-    final professor = properties[PROFESSOR_NAME_LABEL];
-    final details = properties[DETAILS_LABEL];
-    final resource = properties[RESOURCES_LABEL] ?? _extractResources(value);
+    final professor = properties[professorNameLabel];
+    final details = properties[detailsLabel];
+    final resource = properties[resourcesLabel] ?? _extractResources(value);
 
     return ScheduleEntry(
       start: start,
@@ -153,30 +153,30 @@ class RaplaParsingUtils {
       title: title,
       details: details,
       professor: "",
-      type: ScheduleEntryType.Unknown,
+      type: ScheduleEntryType.unknown,
       room: "",
     );
   }
 
   static ScheduleEntryType _extractEntryType(List<Element> tooltip) {
-    if (tooltip.isEmpty) return ScheduleEntryType.Unknown;
+    if (tooltip.isEmpty) return ScheduleEntryType.unknown;
 
     final strongTag = tooltip[0].getElementsByTagName("strong");
-    if (strongTag.isEmpty) return ScheduleEntryType.Unknown;
+    if (strongTag.isEmpty) return ScheduleEntryType.unknown;
 
     final typeString = strongTag[0].innerHtml;
 
     if (entryTypeMapping.containsKey(typeString)) {
       return entryTypeMapping[typeString]!;
     } else {
-      return ScheduleEntryType.Unknown;
+      return ScheduleEntryType.unknown;
     }
   }
 
   static Map<String, String> _parsePropertiesTable(Element infotable) {
     final map = <String, String>{};
-    final labels = infotable.getElementsByClassName(LABEL_CLASS);
-    final values = infotable.getElementsByClassName(VALUE_CLASS);
+    final labels = infotable.getElementsByClassName(labelClass);
+    final values = infotable.getElementsByClassName(valueClass);
 
     for (var i = 0; i < labels.length; i++) {
       map[labels[i].innerHtml] = values[i].innerHtml;
@@ -194,7 +194,7 @@ class RaplaParsingUtils {
   }
 
   static String _extractResources(Element value) {
-    final resources = value.getElementsByClassName(RESOURCE_CLASS);
+    final resources = value.getElementsByClassName(resourceClass);
 
     final resourcesList = <String>[];
     for (final resource in resources) {

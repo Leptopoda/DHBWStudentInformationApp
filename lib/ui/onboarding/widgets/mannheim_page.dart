@@ -55,11 +55,11 @@ class SelectMannheimCourseWidget extends StatelessWidget {
         final viewModel = model as MannheimViewModel?;
 
         switch (viewModel?.loadingState) {
-          case LoadCoursesState.Loading:
+          case LoadCoursesState.loading:
             return _buildLoadingIndicator();
-          case LoadCoursesState.Loaded:
+          case LoadCoursesState.loaded:
             return _buildCourseList(context, viewModel!);
-          case LoadCoursesState.Failed:
+          case LoadCoursesState.failed:
           default:
             return _buildLoadingError(context, viewModel);
         }

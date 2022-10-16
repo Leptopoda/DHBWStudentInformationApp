@@ -21,9 +21,9 @@ class InAppPurchaseManager {
 
   Future<void> _initialize() async {
     addPurchaseCallback(
-      InAppPurchaseHelper.WidgetProductId,
+      InAppPurchaseHelper.widgetProductId,
       (String? productId, PurchaseResultEnum result) =>
-          _setWidgetEnabled(result == PurchaseResultEnum.Success),
+          _setWidgetEnabled(result == PurchaseResultEnum.success),
     );
 
     _inAppPurchaseHelper.purchaseCompleteCallback = _purchaseCompletedCallback;
@@ -39,7 +39,7 @@ class InAppPurchaseManager {
 
   Future<void> _restorePurchases() async {
     final didPurchaseWidget =
-        await didBuyWidget() == PurchaseStateEnum.Purchased;
+        await didBuyWidget() == PurchaseStateEnum.purchased;
     await _setWidgetEnabled(didPurchaseWidget);
   }
 
@@ -47,14 +47,14 @@ class InAppPurchaseManager {
   /// Determines if the widget functionality was bought
   ///
   Future<PurchaseStateEnum> didBuyWidget() {
-    return _inAppPurchaseHelper.didBuyId(InAppPurchaseHelper.WidgetProductId);
+    return _inAppPurchaseHelper.didBuyId(InAppPurchaseHelper.widgetProductId);
   }
 
   ///
   /// Executes the process to purchase widget functionality
   ///
   Future<void> buyWidget() async {
-    await _inAppPurchaseHelper.buyById(InAppPurchaseHelper.WidgetProductId);
+    await _inAppPurchaseHelper.buyById(InAppPurchaseHelper.widgetProductId);
   }
 
   Future<void> donate() async {

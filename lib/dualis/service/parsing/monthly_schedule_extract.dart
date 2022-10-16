@@ -60,7 +60,7 @@ class MonthlyScheduleExtract {
       professor: "",
       details: "",
       room: room,
-      type: ScheduleEntryType.Lesson,
+      type: ScheduleEntryType.lesson,
       start: startDate,
       end: endDate,
     );

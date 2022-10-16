@@ -40,31 +40,31 @@ class SelectSourceDialog {
         ),
         RadioListTile<ScheduleSourceType>(
           groupValue: _currentScheduleSource,
-          value: ScheduleSourceType.Rapla,
+          value: ScheduleSourceType.rapla,
           onChanged: (v) => sourceSelected(v, context),
           title: Text(L.of(context).scheduleSourceTypeRapla),
         ),
         RadioListTile<ScheduleSourceType>(
           groupValue: _currentScheduleSource,
-          value: ScheduleSourceType.Dualis,
+          value: ScheduleSourceType.dualis,
           onChanged: (v) => sourceSelected(v, context),
           title: Text(L.of(context).scheduleSourceTypeDualis),
         ),
         RadioListTile<ScheduleSourceType>(
           groupValue: _currentScheduleSource,
-          value: ScheduleSourceType.Mannheim,
+          value: ScheduleSourceType.mannheim,
           onChanged: (v) => sourceSelected(v, context),
           title: Text(L.of(context).scheduleSourceTypeMannheim),
         ),
         RadioListTile<ScheduleSourceType>(
           groupValue: _currentScheduleSource,
-          value: ScheduleSourceType.Ical,
+          value: ScheduleSourceType.ical,
           onChanged: (v) => sourceSelected(v, context),
           title: Text(L.of(context).scheduleSourceTypeIcal),
         ),
         RadioListTile<ScheduleSourceType>(
           groupValue: _currentScheduleSource,
-          value: ScheduleSourceType.None,
+          value: ScheduleSourceType.none,
           onChanged: (v) => sourceSelected(v, context),
           title: Text(L.of(context).scheduleSourceTypeNone),
         )
@@ -83,28 +83,28 @@ class SelectSourceDialog {
     Navigator.of(context).pop();
 
     switch (type) {
-      case ScheduleSourceType.None:
+      case ScheduleSourceType.none:
         await _scheduleSourceProvider.setupScheduleSource();
         break;
-      case ScheduleSourceType.Rapla:
+      case ScheduleSourceType.rapla:
         await EnterRaplaUrlDialog(
           _preferencesProvider,
           KiwiContainer().resolve(),
         ).show(context);
         break;
-      case ScheduleSourceType.Dualis:
+      case ScheduleSourceType.dualis:
         await EnterDualisCredentialsDialog(
           _preferencesProvider,
           KiwiContainer().resolve(),
         ).show(context);
         break;
-      case ScheduleSourceType.Ical:
+      case ScheduleSourceType.ical:
         await EnterIcalDialog(
           _preferencesProvider,
           KiwiContainer().resolve(),
         ).show(context);
         break;
-      case ScheduleSourceType.Mannheim:
+      case ScheduleSourceType.mannheim:
         await SelectMannheimCourseDialog(
           KiwiContainer().resolve(),
         ).show(context);

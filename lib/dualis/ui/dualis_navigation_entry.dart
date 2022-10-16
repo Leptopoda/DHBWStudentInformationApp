@@ -40,7 +40,7 @@ class DualisNavigationEntry extends NavigationEntry<StudyGradesViewModel> {
         child: PropertyChangeConsumer(
           builder:
               (BuildContext _, StudyGradesViewModel? __, Set<Object>? ___) =>
-                  model.loginState != LoginState.LoggedIn
+                  model.loginState != LoginState.loggedIn
                       ? IconButton(
                           icon: const Icon(Icons.help_outline),
                           onPressed: () async {

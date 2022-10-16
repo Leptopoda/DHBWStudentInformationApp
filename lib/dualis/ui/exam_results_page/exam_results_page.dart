@@ -171,13 +171,13 @@ class ExamResultsPage extends StatelessWidget {
 
   Widget _examGradeToWidget(BuildContext context, ExamGrade grade) {
     switch (grade.state) {
-      case ExamGradeState.NotGraded:
+      case ExamGradeState.notGraded:
         return const Text("");
-      case ExamGradeState.Graded:
+      case ExamGradeState.graded:
         return Text(grade.gradeValue!);
-      case ExamGradeState.Passed:
+      case ExamGradeState.passed:
         return Text(L.of(context).examPassed);
-      case ExamGradeState.Failed:
+      case ExamGradeState.failed:
         return Text(L.of(context).examNotPassed);
     }
   }

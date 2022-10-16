@@ -31,7 +31,7 @@ class DualisAuthentication {
   Session get session => _session ??= Session();
 
   LoginResult? _loginState;
-  LoginResult get loginState => _loginState ??= LoginResult.LoggedOut;
+  LoginResult get loginState => _loginState ??= LoginResult.loggedOut;
 
   Future<LoginResult> login(
     Credentials credentials,
@@ -47,7 +47,7 @@ class DualisAuthentication {
     if (loginResponse == null ||
         loginResponse.statusCode != 200 ||
         !loginResponse.headers.containsKey("refresh")) {
-      _loginState = LoginResult.LoginFailed;
+      _loginState = LoginResult.loginFailed;
       return loginState;
     }
 
@@ -59,7 +59,7 @@ class DualisAuthentication {
     );
 
     if (redirectUrl == null) {
-      _loginState = LoginResult.LoginFailed;
+      _loginState = LoginResult.loginFailed;
       return loginState;
     }
 
@@ -74,7 +74,7 @@ class DualisAuthentication {
     );
 
     if (dualisUrls.mainPageUrl == null) {
-      _loginState = LoginResult.LoginFailed;
+      _loginState = LoginResult.loginFailed;
       return loginState;
     }
 
@@ -91,7 +91,7 @@ class DualisAuthentication {
       dualisEndpoint,
     );
 
-    _loginState = LoginResult.LoggedIn;
+    _loginState = LoginResult.loggedIn;
     return loginState;
   }
 
@@ -154,7 +154,7 @@ class DualisAuthentication {
 
     final loginResult = await login(_credentials!, cancellationToken);
 
-    if (loginResult == LoginResult.LoggedIn) {
+    if (loginResult == LoginResult.loggedIn) {
       return session.get(
         _fillUrlWithAuthToken(url),
         cancellationToken,
@@ -171,7 +171,7 @@ class DualisAuthentication {
 
     _session = null;
     _dualisUrls = null;
-    _loginState = LoginResult.LoggedOut;
+    _loginState = LoginResult.loggedOut;
 
     await logoutRequest;
   }

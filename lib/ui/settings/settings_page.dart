@@ -102,14 +102,14 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             applicationLegalese: L.of(context).applicationLegalese,
             applicationName: L.of(context).applicationName,
-            applicationVersion: ApplicationVersion,
+            applicationVersion: applicationVersion,
           );
         },
       ),
       ListTile(
         title: Text(L.of(context).settingsViewSourceCode),
         onTap: () {
-          launchUrl(Uri.parse(ApplicationSourceCodeUrl));
+          launchUrl(Uri.parse(applicationSourceCodeUrl));
         },
       ),
       const Divider(),
@@ -222,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> requestCalendarPermission() async {
     final permission = await CalendarAccess().requestCalendarPermission();
-    if (permission == CalendarPermission.PermissionDenied) {
+    if (permission == CalendarPermission.permissionDenied) {
       await showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(

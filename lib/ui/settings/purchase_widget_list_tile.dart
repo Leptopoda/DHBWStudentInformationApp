@@ -56,7 +56,7 @@ class _PurchaseWidgetListTileState extends State<PurchaseWidgetListTile> {
         .value;
 
     if (!model.areWidgetsSupported! ||
-        model.widgetPurchaseState == PurchaseStateEnum.Unknown ||
+        model.widgetPurchaseState == PurchaseStateEnum.unknown ||
         model.widgetPurchaseState == null) {
       return Container();
     }
@@ -86,7 +86,7 @@ class _PurchaseWidgetListTileState extends State<PurchaseWidgetListTile> {
       );
     }
 
-    if (model.widgetPurchaseState == PurchaseStateEnum.Purchased) {
+    if (model.widgetPurchaseState == PurchaseStateEnum.purchased) {
       return Row(
         children: [
           const Padding(
@@ -109,7 +109,7 @@ class _PurchaseWidgetListTileState extends State<PurchaseWidgetListTile> {
 
   Future<void> _purchaseClicked() async {
     if (isPurchasing ||
-        model.widgetPurchaseState == PurchaseStateEnum.Purchased) return;
+        model.widgetPurchaseState == PurchaseStateEnum.purchased) return;
 
     setState(() {
       isPurchasing = true;

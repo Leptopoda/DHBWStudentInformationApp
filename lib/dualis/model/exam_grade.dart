@@ -1,8 +1,8 @@
 enum ExamGradeState {
-  NotGraded,
-  Graded,
-  Passed,
-  Failed,
+  notGraded,
+  graded,
+  passed,
+  failed,
 }
 
 // TODO: [leptopoda] implement into the enum
@@ -11,18 +11,18 @@ class ExamGrade {
   final String? gradeValue;
 
   const ExamGrade.failed()
-      : state = ExamGradeState.Failed,
+      : state = ExamGradeState.failed,
         gradeValue = "";
 
   const ExamGrade.notGraded()
-      : state = ExamGradeState.NotGraded,
+      : state = ExamGradeState.notGraded,
         gradeValue = "";
 
   const ExamGrade.passed()
-      : state = ExamGradeState.Passed,
+      : state = ExamGradeState.passed,
         gradeValue = "";
 
-  ExamGrade.graded(this.gradeValue) : state = ExamGradeState.Graded;
+  ExamGrade.graded(this.gradeValue) : state = ExamGradeState.graded;
 
   factory ExamGrade.fromString(String? grade) {
     if (grade == "noch nicht gesetzt" || grade == "") {

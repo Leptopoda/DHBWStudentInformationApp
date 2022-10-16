@@ -10,11 +10,11 @@ import 'package:dhbwstudentapp/dualis/service/dualis_service.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_source_type.dart';
 
 enum LoginState {
-  LoggedOut,
-  LoggingIn,
-  LoggingOut,
-  LoggedIn,
-  LoginFailed,
+  loggedOut,
+  loggingIn,
+  loggingOut,
+  loggedIn,
+  loginFailed,
 }
 
 class StudyGradesViewModel extends BaseViewModel {
@@ -22,7 +22,7 @@ class StudyGradesViewModel extends BaseViewModel {
 
   final PreferencesProvider _preferencesProvider;
 
-  LoginState _loginState = LoginState.LoggedOut;
+  LoginState _loginState = LoginState.loggedOut;
   LoginState get loginState => _loginState;
 
   StudyGrades? _studyGrades;
@@ -56,12 +56,12 @@ class StudyGradesViewModel extends BaseViewModel {
     try {
       final result = await _dualisService.login(credentials);
 
-      success = result == LoginResult.LoggedIn;
+      success = result == LoginResult.loggedIn;
     } on OperationCancelledException catch (_) {
       success = false;
     }
 
-    _loginState = success ? LoginState.LoggedIn : LoginState.LoginFailed;
+    _loginState = success ? LoginState.loggedIn : LoginState.loginFailed;
 
     notifyListeners("loginState");
 
@@ -85,7 +85,7 @@ class StudyGradesViewModel extends BaseViewModel {
     // When the schedule source is Dualis the login credentials should not be
     // cleared
     if (await _preferencesProvider.getScheduleSourceType() ==
-        ScheduleSourceType.Dualis.index) {
+        ScheduleSourceType.dualis.index) {
       return;
     }
 
@@ -224,7 +224,7 @@ class StudyGradesViewModel extends BaseViewModel {
   Future<void> logout() async {
     print("Logging out...");
 
-    _loginState = LoginState.LoggingOut;
+    _loginState = LoginState.loggingOut;
     notifyListeners("loginState");
 
     _semesterNamesCancellationToken.cancel();
@@ -234,7 +234,7 @@ class StudyGradesViewModel extends BaseViewModel {
 
     await _dualisService.logout();
 
-    _loginState = LoginState.LoggedOut;
+    _loginState = LoginState.loggedOut;
     _studyGrades = null;
     _allModules = null;
     _semesterNames = null;

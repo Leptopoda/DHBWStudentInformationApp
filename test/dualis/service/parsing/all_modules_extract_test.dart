@@ -21,9 +21,9 @@ Future<void> main() async {
     expect(modules[1].name, "Theoretische Informatik I");
     expect(modules[1].credits, "5,0");
     expect(modules[1].finalGrade, "4,0");
-    expect(modules[1].state, ExamState.Passed);
+    expect(modules[1].state, ExamState.passed);
 
-    expect(modules[0].state, ExamState.Pending);
+    expect(modules[0].state, ExamState.pending);
   });
 
   test('AllModulesExtract invalid html throws exception', () async {

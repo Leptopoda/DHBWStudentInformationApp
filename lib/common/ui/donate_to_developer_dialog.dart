@@ -22,7 +22,7 @@ class DonateToDeveloperDialog {
   Future<void> showIfNeeded(BuildContext context) async {
     if (await _preferencesProvider.getDidShowDonateDialog()) return;
 
-    if (_appLaunchCounter >= DonateLaunchAfter) {
+    if (_appLaunchCounter >= donateLaunchAfter) {
       await _preferencesProvider.setDidShowDonateDialog(true);
       await _showDialog(context);
 

@@ -1,9 +1,9 @@
 import 'package:dhbwstudentapp/dualis/model/exam_grade.dart';
 
 enum ExamState {
-  Passed,
-  Failed,
-  Pending,
+  passed,
+  failed,
+  pending,
 }
 
 class Exam {

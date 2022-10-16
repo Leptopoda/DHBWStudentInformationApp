@@ -18,7 +18,7 @@ class DualisPage extends StatelessWidget {
 
     Widget widget;
 
-    if (viewModel.loginState != LoginState.LoggedIn) {
+    if (viewModel.loginState != LoginState.loggedIn) {
       widget = const DualisLoginPage();
     } else {
       widget = PropertyChangeProvider<StudyGradesViewModel, String>(

@@ -33,7 +33,7 @@ class DualisLoginViewModel extends OnboardingStepViewModel {
       notifyListeners("isLoading");
 
       _loginSuccess =
-          await dualisService.login(credentials) == LoginResult.LoggedIn;
+          await dualisService.login(credentials) == LoginResult.loggedIn;
       isValid = _loginSuccess;
     } catch (ex) {
       isValid = false;

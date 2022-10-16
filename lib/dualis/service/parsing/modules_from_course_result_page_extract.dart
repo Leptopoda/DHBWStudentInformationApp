@@ -62,7 +62,7 @@ class ModulesFromCourseResultPageExtract {
     ExamState? statusEnum;
 
     if (status == "bestanden") {
-      statusEnum = ExamState.Passed;
+      statusEnum = ExamState.passed;
     }
 
     if (grade == "noch nicht gesetzt") {

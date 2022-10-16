@@ -8,26 +8,26 @@ import 'package:json_annotation/json_annotation.dart';
 part 'schedule_entry.g.dart';
 
 enum ScheduleEntryType {
-  Unknown,
-  Lesson,
-  Online,
-  PublicHoliday,
-  Exam;
+  unknown,
+  lesson,
+  online,
+  publicHoliday,
+  exam;
 
   Color color(BuildContext context) {
     final scheduleEntryTheme =
         Theme.of(context).extension<ScheduleEntryTheme>()!;
 
     switch (this) {
-      case ScheduleEntryType.PublicHoliday:
+      case ScheduleEntryType.publicHoliday:
         return scheduleEntryTheme.publicHoliday;
-      case ScheduleEntryType.Lesson:
+      case ScheduleEntryType.lesson:
         return scheduleEntryTheme.lesson;
-      case ScheduleEntryType.Exam:
+      case ScheduleEntryType.exam:
         return scheduleEntryTheme.exam;
-      case ScheduleEntryType.Online:
+      case ScheduleEntryType.online:
         return scheduleEntryTheme.online;
-      case ScheduleEntryType.Unknown:
+      case ScheduleEntryType.unknown:
         return scheduleEntryTheme.unknown;
     }
   }

@@ -136,9 +136,9 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                                 schedule:
                                     model.weekSchedule ?? const Schedule(),
                                 displayStart: model.clippedDateStart ??
-                                    model.currentDateStart,
+                                    model.currentDateStart!,
                                 displayEnd: model.clippedDateEnd ??
-                                    model.currentDateEnd,
+                                    model.currentDateEnd!,
                                 onScheduleEntryTap: (entry) {
                                   _onScheduleEntryTap(context, entry);
                                 },

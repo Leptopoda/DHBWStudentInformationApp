@@ -6,12 +6,12 @@ typedef ColorDelegate = Color Function(BuildContext context);
 typedef TextDelegate = String Function(BuildContext context);
 
 final Map<ScheduleEntryType, TextDelegate> scheduleEntryTypeTextMapping = {
-  ScheduleEntryType.PublicHoliday: (c) =>
+  ScheduleEntryType.publicHoliday: (c) =>
       L.of(c).scheduleEntryTypePublicHoliday,
-  ScheduleEntryType.Lesson: (c) => L.of(c).scheduleEntryTypeClass,
-  ScheduleEntryType.Exam: (c) => L.of(c).scheduleEntryTypeExam,
-  ScheduleEntryType.Online: (c) => L.of(c).scheduleEntryTypeOnline,
-  ScheduleEntryType.Unknown: (c) => L.of(c).scheduleEntryTypeUnknown,
+  ScheduleEntryType.lesson: (c) => L.of(c).scheduleEntryTypeClass,
+  ScheduleEntryType.exam: (c) => L.of(c).scheduleEntryTypeExam,
+  ScheduleEntryType.online: (c) => L.of(c).scheduleEntryTypeOnline,
+  ScheduleEntryType.unknown: (c) => L.of(c).scheduleEntryTypeUnknown,
 };
 
 String scheduleEntryTypeToReadableString(

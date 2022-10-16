@@ -1,7 +1,7 @@
 enum ScheduleSourceType {
-  None,
-  Rapla,
-  Dualis,
-  Ical,
-  Mannheim,
+  none,
+  rapla,
+  dualis,
+  ical,
+  mannheim,
 }

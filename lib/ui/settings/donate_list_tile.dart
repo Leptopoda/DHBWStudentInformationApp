@@ -67,7 +67,7 @@ class _DonateListTileState extends State<DonateListTile> {
           ),
         ),
       );
-    } else if (model.widgetPurchaseState == PurchaseStateEnum.NotPurchased) {
+    } else if (model.widgetPurchaseState == PurchaseStateEnum.notPurchased) {
       return ListTile(
         title: Text(L.of(context).donateButtonTitle),
         subtitle: isPurchasing
@@ -95,7 +95,7 @@ class _DonateListTileState extends State<DonateListTile> {
 
   Future<void> _purchaseClicked() async {
     if (isPurchasing ||
-        model.widgetPurchaseState == PurchaseStateEnum.Purchased) return;
+        model.widgetPurchaseState == PurchaseStateEnum.purchased) return;
 
     setState(() {
       isPurchasing = true;

@@ -3,15 +3,15 @@ import 'package:dhbwstudentapp/schedule/service/mannheim/mannheim_course_scraper
 import 'package:dhbwstudentapp/ui/onboarding/viewmodels/onboarding_view_model_base.dart';
 
 enum LoadCoursesState {
-  Loading,
-  Loaded,
-  Failed,
+  loading,
+  loaded,
+  failed,
 }
 
 class MannheimViewModel extends OnboardingStepViewModel {
   final ScheduleSourceProvider _scheduleSourceProvider;
 
-  LoadCoursesState _loadingState = LoadCoursesState.Loading;
+  LoadCoursesState _loadingState = LoadCoursesState.loading;
   LoadCoursesState get loadingState => _loadingState;
 
   Course? _selectedCourse;
@@ -26,16 +26,16 @@ class MannheimViewModel extends OnboardingStepViewModel {
   }
 
   Future<void> loadCourses() async {
-    _loadingState = LoadCoursesState.Loading;
+    _loadingState = LoadCoursesState.loading;
     notifyListeners("loadingState");
 
     try {
       await Future.delayed(const Duration(seconds: 1));
       _courses = await const MannheimCourseScraper().loadCourses();
-      _loadingState = LoadCoursesState.Loaded;
+      _loadingState = LoadCoursesState.loaded;
     } catch (ex) {
       _courses = null;
-      _loadingState = LoadCoursesState.Failed;
+      _loadingState = LoadCoursesState.failed;
     }
 
     notifyListeners("loadingState");

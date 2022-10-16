@@ -5,7 +5,7 @@ import 'package:dhbwstudentapp/ui/onboarding/viewmodels/onboarding_view_model_ba
 class SelectSourceViewModel extends OnboardingStepViewModel {
   final PreferencesProvider _preferencesProvider;
 
-  ScheduleSourceType _scheduleSourceType = ScheduleSourceType.Rapla;
+  ScheduleSourceType _scheduleSourceType = ScheduleSourceType.rapla;
   ScheduleSourceType get scheduleSourceType => _scheduleSourceType;
 
   SelectSourceViewModel(this._preferencesProvider) {
@@ -28,15 +28,15 @@ class SelectSourceViewModel extends OnboardingStepViewModel {
 
   String? nextStep() {
     switch (_scheduleSourceType) {
-      case ScheduleSourceType.Rapla:
+      case ScheduleSourceType.rapla:
         return "rapla";
-      case ScheduleSourceType.Dualis:
+      case ScheduleSourceType.dualis:
         return "dualis";
-      case ScheduleSourceType.None:
+      case ScheduleSourceType.none:
         return "dualis";
-      case ScheduleSourceType.Mannheim:
+      case ScheduleSourceType.mannheim:
         return "mannheim";
-      case ScheduleSourceType.Ical:
+      case ScheduleSourceType.ical:
         return "ical";
       default:
         return null;

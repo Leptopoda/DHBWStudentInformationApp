@@ -89,7 +89,7 @@ class RateInStoreDialog {
     await analytics.logEvent(name: "rateLater");
 
     await _preferencesProvider.setNextRateInStoreLaunchCount(
-      RateInStoreLaunchAfter + _appLaunchCounter,
+      rateInStoreLaunchAfter + _appLaunchCounter,
     );
   }
 

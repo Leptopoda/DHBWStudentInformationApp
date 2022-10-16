@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 enum CalendarPermission {
-  PermissionGranted,
-  PermissionDenied,
+  permissionGranted,
+  permissionDenied,
 }
 
 ///
@@ -26,16 +26,16 @@ class CalendarAccess {
       if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
         if (!permissionsGranted.isSuccess || !permissionsGranted.data!) {
-          return CalendarPermission.PermissionDenied;
+          return CalendarPermission.permissionDenied;
         }
       }
 
-      return CalendarPermission.PermissionGranted;
+      return CalendarPermission.permissionGranted;
     } on PlatformException catch (e, trace) {
       reportException(e, trace);
     }
 
-    return CalendarPermission.PermissionDenied;
+    return CalendarPermission.permissionDenied;
   }
 
   Future<List<Calendar>?> queryWriteableCalendars() async {

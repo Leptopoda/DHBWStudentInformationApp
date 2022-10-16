@@ -9,11 +9,11 @@ class GradeStateIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (state) {
-      case ExamState.Passed:
+      case ExamState.passed:
         return const Icon(Icons.check, color: Colors.green);
-      case ExamState.Failed:
+      case ExamState.failed:
         return const Icon(Icons.close, color: Colors.red);
-      case ExamState.Pending:
+      case ExamState.pending:
       default:
         return Container();
     }

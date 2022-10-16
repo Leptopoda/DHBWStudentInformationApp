@@ -54,10 +54,10 @@ class AllModulesExtract {
     ExamState? stateEnum;
 
     if (state == "Bestanden") {
-      stateEnum = ExamState.Passed;
+      stateEnum = ExamState.passed;
     }
     if (state == "Offen") {
-      stateEnum = ExamState.Pending;
+      stateEnum = ExamState.pending;
     }
 
     final module = DualisModule(

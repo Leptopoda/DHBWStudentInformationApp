@@ -132,7 +132,7 @@ class DualisScraper {
   }
 
   bool isLoggedIn() {
-    return _dualisAuthentication.loginState == LoginResult.LoggedIn;
+    return _dualisAuthentication.loginState == LoginResult.loggedIn;
   }
 
   set loginCredentials(Credentials credentials) {
