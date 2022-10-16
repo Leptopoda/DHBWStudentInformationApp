@@ -47,15 +47,13 @@ class IcalScheduleSource extends ScheduleSource {
     String url,
     CancellationToken cancellationToken,
   ) async {
-    url = url.replaceAll("webcal://", "https://");
-
     final requestCancellationToken = http.CancellationToken();
 
     try {
       cancellationToken.cancellationCallback = requestCancellationToken.cancel;
 
       final response = await http.HttpClientHelper.get(
-        Uri.parse(url),
+        Uri.parse(url.replaceAll("webcal://", "https://")),
         cancelToken: requestCancellationToken,
       );
 

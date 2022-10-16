@@ -18,8 +18,7 @@ class AllDatesExtract {
   }
 
   List<DateEntry> _extractAllDates(String body, String? databaseName) {
-    body = body.replaceAll(RegExp("<(br|BR)[ /]*>"), "\n");
-    final document = parse(body);
+    final document = parse(body.replaceAll(RegExp("<(br|BR)[ /]*>"), "\n"));
 
     // The dates are located in the first <p> element of the page
     final dateContainingElement = document.getElementsByTagName("p")[0];
@@ -69,15 +68,15 @@ class AllDatesExtract {
   }
 
   DateTime? _parseDateTime(String date, String time) {
+    final String dateAndTimeString;
     if (time == "24:00") {
-      time = "00:00";
+      dateAndTimeString = "$date 00:00";
+    } else {
+      dateAndTimeString = "$date $time";
     }
 
-    final dateAndTimeString = "$date $time";
-
     try {
-      final date = DateFormat("dd.MM.yyyy hh:mm").parse(dateAndTimeString);
-      return date;
+      return DateFormat("dd.MM.yyyy hh:mm").parse(dateAndTimeString);
     } on FormatException catch (_) {
       return null;
     }

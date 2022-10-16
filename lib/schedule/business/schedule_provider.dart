@@ -10,7 +10,6 @@ import 'package:dhbwstudentapp/schedule/model/schedule.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_entry.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_query_information.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_query_result.dart';
-import 'package:dhbwstudentapp/schedule/service/schedule_prettifier.dart';
 import 'package:dhbwstudentapp/schedule/service/schedule_source.dart';
 import 'package:intl/intl.dart';
 
@@ -80,7 +79,7 @@ class ScheduleProvider {
         print("No schedule returned!");
       } else {
         if (await _preferencesProvider.getPrettifySchedule()) {
-          schedule = SchedulePrettifier().prettifySchedule(schedule);
+          schedule = schedule.prettify();
         }
 
         print("Schedule returned with ${schedule.entries.length} entries");

@@ -47,11 +47,11 @@ class DailyScheduleViewModel extends BaseViewModel {
     DateTime start,
     DateTime end,
   ) async {
-    start = start.startOfDay;
-    end = end.tomorrow.startOfDay;
+    final startDay = start.startOfDay;
+    final endDay = end.tomorrow.startOfDay;
 
-    if (!(start.isAfter(currentDate!) || end.isBefore(currentDate!))) {
-      schedule = schedule.trim(
+    if (!(startDay.isAfter(currentDate!) || endDay.isBefore(currentDate!))) {
+      schedule.trim(
         currentDate?.startOfDay,
         currentDate?.tomorrow.startOfDay,
       );

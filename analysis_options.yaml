@@ -16,5 +16,4 @@ linter:
     avoid_print: false
     avoid_positional_boolean_parameters: false
     use_build_context_synchronously: false
-    parameter_assignments: false
     avoid_setters_without_getters: false

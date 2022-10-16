@@ -21,9 +21,9 @@ class InAppPurchaseManager {
 
   Future<void> _initialize() async {
     addPurchaseCallback(
-      InAppPurchaseHelper.widgetProductId,
       (String? productId, PurchaseResultEnum result) =>
           _setWidgetEnabled(result == PurchaseResultEnum.success),
+      InAppPurchaseHelper.widgetProductId,
     );
 
     _inAppPurchaseHelper.purchaseCompleteCallback = _purchaseCompletedCallback;
@@ -95,11 +95,9 @@ class InAppPurchaseManager {
   /// for all product ids, pass null or "*" as productId
   ///
   void addPurchaseCallback(
-    String? productId,
-    PurchaseCompletedCallback callback,
-  ) {
-    productId ??= "*";
-
+    PurchaseCompletedCallback callback, [
+    String productId = "*",
+  ]) {
     purchaseCallbacks[productId]?.add(callback);
   }
 
@@ -107,11 +105,9 @@ class InAppPurchaseManager {
   /// Removes a callback which was registered using [addPurchaseCallback]
   ///
   void removePurchaseCallback(
-    String? productId,
-    PurchaseCompletedCallback callback,
-  ) {
-    productId ??= "*";
-
+    PurchaseCompletedCallback callback, [
+    String productId = "*",
+  ]) {
     purchaseCallbacks[productId]?.remove(callback);
   }
 

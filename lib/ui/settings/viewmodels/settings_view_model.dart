@@ -50,8 +50,8 @@ class SettingsViewModel extends BaseViewModel {
     _loadPreferences();
 
     _inAppPurchaseManager.addPurchaseCallback(
-      InAppPurchaseHelper.widgetProductId,
       _widgetPurchaseCallback,
+      InAppPurchaseHelper.widgetProductId,
     );
   }
 
@@ -141,8 +141,8 @@ class SettingsViewModel extends BaseViewModel {
     super.dispose();
 
     _inAppPurchaseManager.removePurchaseCallback(
-      InAppPurchaseHelper.widgetProductId,
       _widgetPurchaseCallback,
+      InAppPurchaseHelper.widgetProductId,
     );
   }
 }

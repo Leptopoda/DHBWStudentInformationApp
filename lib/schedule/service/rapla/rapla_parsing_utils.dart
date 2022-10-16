@@ -71,27 +71,7 @@ class RaplaParsingUtils {
           extractScheduleFromTooltip(tooltip, value, scheduleEntry, start, end);
     }
 
-    return improveScheduleEntry(scheduleEntry);
-  }
-
-  static ScheduleEntry improveScheduleEntry(ScheduleEntry scheduleEntry) {
-    if (scheduleEntry.title.isEmpty) {
-      throw ElementNotFoundParseException("title");
-    }
-
-    final professor = scheduleEntry.professor;
-    if (professor.endsWith(",")) {
-      scheduleEntry = scheduleEntry.copyWith(
-        professor: professor.substring(0, professor.length - 1),
-      );
-    }
-
-    return scheduleEntry.copyWith(
-      title: trimAndEscapeString(scheduleEntry.title),
-      details: trimAndEscapeString(scheduleEntry.details),
-      professor: trimAndEscapeString(scheduleEntry.professor),
-      room: trimAndEscapeString(scheduleEntry.room),
-    );
+    return scheduleEntry.improve();
   }
 
   static ScheduleEntry extractScheduleFromTooltip(

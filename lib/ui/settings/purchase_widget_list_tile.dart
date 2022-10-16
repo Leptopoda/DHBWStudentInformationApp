@@ -26,14 +26,14 @@ class _PurchaseWidgetListTileState extends State<PurchaseWidgetListTile> {
   void initState() {
     super.initState();
 
-    inAppPurchaseManager.addPurchaseCallback(null, purchaseCallback);
+    inAppPurchaseManager.addPurchaseCallback(purchaseCallback);
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    inAppPurchaseManager.removePurchaseCallback(null, purchaseCallback);
+    inAppPurchaseManager.removePurchaseCallback(purchaseCallback);
   }
 
   void purchaseCallback(String? productId, PurchaseResultEnum result) {

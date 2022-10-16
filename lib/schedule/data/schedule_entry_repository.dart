@@ -81,6 +81,7 @@ class ScheduleEntryRepository {
     final existingEntry = await queryExistingScheduleEntry(entry);
 
     if (existingEntry != null) {
+      // ignore: parameter_assignments
       entry = entry.copyWith.id(existingEntry.id);
       return;
     }
@@ -88,6 +89,7 @@ class ScheduleEntryRepository {
     final row = entry.toJson();
     if (entry.id == null) {
       final id = await _database.insert(ScheduleEntry.tableName, row);
+      // ignore: parameter_assignments
       entry = entry.copyWith.id(id);
     } else {
       await _database.update(ScheduleEntry.tableName, row);

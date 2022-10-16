@@ -26,6 +26,16 @@ class Schedule {
     }
   }
 
+  Schedule prettify() {
+    final allEntries = <ScheduleEntry>[];
+
+    for (final entry in entries) {
+      allEntries.add(entry.prettify());
+    }
+
+    return copyWith(entries: allEntries);
+  }
+
   // TODO: [Leptopoda] improve nullability
   Schedule trim(DateTime? startDate, DateTime? endDate) {
     final newList = <ScheduleEntry>[];
