@@ -12,10 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ScheduleWidget extends StatelessWidget {
-  final Schedule? schedule;
-  final DateTime? displayStart;
-  final DateTime? displayEnd;
-  final DateTime now;
+  final Schedule schedule;
+  final DateTime displayStart;
+  final DateTime displayEnd;
   final int displayStartHour;
   final int displayEndHour;
   final ScheduleEntryTapCallback onScheduleEntryTap;
@@ -26,7 +25,6 @@ class ScheduleWidget extends StatelessWidget {
     required this.displayStart,
     required this.displayEnd,
     required this.onScheduleEntryTap,
-    required this.now,
     required this.displayStartHour,
     required this.displayEndHour,
   });
@@ -65,14 +63,12 @@ class ScheduleWidget extends StatelessWidget {
 
     var entryWidgets = <Widget>[];
 
-    if (schedule != null) {
-      entryWidgets = buildEntryWidgets(
-        hourHeight,
-        minuteHeight,
-        width - 50,
-        days,
-      );
-    }
+    entryWidgets = buildEntryWidgets(
+      hourHeight,
+      minuteHeight,
+      width - 50,
+      days,
+    );
 
     return Stack(
       fit: StackFit.expand,
@@ -104,7 +100,6 @@ class ScheduleWidget extends StatelessWidget {
             scheduleTheme.scheduleInPastOverlay,
             displayStart,
             displayEnd,
-            now,
             days,
           ),
         )
@@ -114,16 +109,17 @@ class ScheduleWidget extends StatelessWidget {
 
   int calculateDisplayedDays() {
     final startEndDifference =
-        toStartOfDay(displayEnd)?.difference(toStartOfDay(displayStart)!);
+        displayEnd.startOfDay.difference(displayStart.startOfDay);
 
-    var days = (startEndDifference?.inDays ?? 0) + 1;
+    final days = startEndDifference.inDays + 1;
 
     if (days > 7) {
-      days = 7;
+      return 7;
     } else if (days < 5) {
-      days = 5;
+      return 5;
+    } else {
+      return days;
     }
-    return days;
   }
 
   List<Widget> buildLabelWidgets(
@@ -158,16 +154,16 @@ class ScheduleWidget extends StatelessWidget {
     final dateFormatter =
         DateFormat("d. MMM", L.of(context).locale.languageCode);
 
-    final loopEnd = toStartOfDay(tomorrow(displayEnd))!;
+    final loopEnd = displayEnd.tomorrow.startOfDay;
 
     final textTheme = Theme.of(context).textTheme;
     final customTextThme = Theme.of(context).extension<CustomTextTheme>();
     final scheduleWidgetColumnTitleDay = textTheme.subtitle2
         ?.merge(customTextThme?.scheduleWidgetColumnTitleDay);
 
-    for (var columnDate = toStartOfDay(displayStart)!;
+    for (var columnDate = displayStart.startOfDay;
         columnDate.isBefore(loopEnd);
-        columnDate = tomorrow(columnDate)!) {
+        columnDate = columnDate.tomorrow) {
       labelWidgets.add(
         Positioned(
           top: 0,
@@ -203,21 +199,20 @@ class ScheduleWidget extends StatelessWidget {
     double width,
     int columns,
   ) {
-    if (schedule == null) return <Widget>[];
-    if (schedule!.entries.isEmpty) return <Widget>[];
+    if (schedule.entries.isEmpty) return <Widget>[];
 
     final entryWidgets = <Widget>[];
 
     final columnWidth = width / columns;
 
-    DateTime? columnStartDate = toStartOfDay(displayStart);
-    DateTime? columnEndDate = tomorrow(columnStartDate);
+    DateTime columnStartDate = displayStart.startOfDay;
+    DateTime columnEndDate = columnStartDate.tomorrow;
 
     for (int i = 0; i < columns; i++) {
       final xPosition = columnWidth * i;
       final maxWidth = columnWidth;
 
-      final columnSchedule = schedule!.trim(columnStartDate, columnEndDate);
+      final columnSchedule = schedule.trim(columnStartDate, columnEndDate);
 
       entryWidgets.addAll(
         buildEntryWidgetsForColumn(
@@ -230,7 +225,7 @@ class ScheduleWidget extends StatelessWidget {
       );
 
       columnStartDate = columnEndDate;
-      columnEndDate = tomorrow(columnEndDate);
+      columnEndDate = columnEndDate.tomorrow;
     }
 
     return entryWidgets;

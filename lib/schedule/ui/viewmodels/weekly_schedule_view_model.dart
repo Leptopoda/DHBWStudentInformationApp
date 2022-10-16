@@ -12,6 +12,7 @@ import 'package:dhbwstudentapp/schedule/model/schedule_query_result.dart';
 import 'package:dhbwstudentapp/schedule/service/schedule_source.dart';
 import 'package:flutter/foundation.dart';
 
+// TODO: [Leptopoda] that's not nullaware at all :(
 class WeeklyScheduleViewModel extends BaseViewModel {
   static const Duration weekDuration = Duration(days: 7);
 
@@ -42,7 +43,7 @@ class WeeklyScheduleViewModel extends BaseViewModel {
 
   String? scheduleUrl;
 
-  DateTime get now => DateTime.now();
+  //DateTime get now => DateTime.now();
 
   Timer? _errorResetTimer;
   Timer? _updateNowTimer;
@@ -62,8 +63,8 @@ class WeeklyScheduleViewModel extends BaseViewModel {
   Future<void> _initViewModel() async {
     _setSchedule(
       null,
-      toDayOfWeek(DateTime.now(), DateTime.monday)!,
-      toDayOfWeek(DateTime.now(), DateTime.friday),
+      DateTime.now().toDayOfWeek(DateTime.monday),
+      DateTime.now().toDayOfWeek(DateTime.friday),
     );
 
     await goToToday();
@@ -80,7 +81,7 @@ class WeeklyScheduleViewModel extends BaseViewModel {
     if (setupSuccess) await updateSchedule(currentDateStart, currentDateEnd);
   }
 
-  void _setSchedule(Schedule? schedule, DateTime start, DateTime? end) {
+  void _setSchedule(Schedule? schedule, DateTime start, DateTime end) {
     weekSchedule = schedule;
     didUpdateScheduleIntoFuture = currentDateStart?.isBefore(start) ?? true;
     currentDateStart = start;
@@ -91,11 +92,11 @@ class WeeklyScheduleViewModel extends BaseViewModel {
       final scheduleEnd = weekSchedule!.getEndDate();
 
       if (scheduleStart == null && scheduleEnd == null) {
-        clippedDateStart = toDayOfWeek(start, DateTime.monday);
-        clippedDateEnd = toDayOfWeek(start, DateTime.friday);
+        clippedDateStart = start.toDayOfWeek(DateTime.monday);
+        clippedDateEnd = start.toDayOfWeek(DateTime.friday);
       } else {
-        clippedDateStart = toDayOfWeek(scheduleStart, DateTime.monday);
-        clippedDateEnd = toDayOfWeek(scheduleEnd, DateTime.friday);
+        clippedDateStart = scheduleStart?.toDayOfWeek(DateTime.monday);
+        clippedDateEnd = scheduleEnd?.toDayOfWeek(DateTime.friday);
       }
 
       if (scheduleEnd?.isAfter(clippedDateEnd!) ?? false) {
@@ -108,8 +109,8 @@ class WeeklyScheduleViewModel extends BaseViewModel {
       displayEndHour = weekSchedule?.getEndTime()?.hour ?? 0;
       displayEndHour = max(displayEndHour + 1, 17);
     } else {
-      clippedDateStart = toDayOfWeek(currentDateStart, DateTime.monday);
-      clippedDateEnd = toDayOfWeek(currentDateEnd, DateTime.friday);
+      clippedDateStart = currentDateStart?.toDayOfWeek(DateTime.monday);
+      clippedDateEnd = currentDateEnd?.toDayOfWeek(DateTime.friday);
     }
 
     notifyListeners("weekSchedule");
@@ -117,22 +118,21 @@ class WeeklyScheduleViewModel extends BaseViewModel {
 
   Future nextWeek() async {
     await updateSchedule(
-      toNextWeek(currentDateStart),
-      toNextWeek(currentDateEnd),
+      currentDateStart?.nextWeek,
+      currentDateEnd?.nextWeek,
     );
   }
 
   Future previousWeek() async {
     await updateSchedule(
-      toPreviousWeek(currentDateStart),
-      toPreviousWeek(currentDateEnd),
+      currentDateStart?.previousWeek,
+      currentDateEnd?.previousWeek,
     );
   }
 
   Future goToToday() async {
-    currentDateStart =
-        toStartOfDay(toDayOfWeek(DateTime.now(), DateTime.monday));
-    currentDateEnd = toNextWeek(currentDateStart);
+    currentDateStart = DateTime.now().toDayOfWeek(DateTime.monday).startOfDay;
+    currentDateEnd = currentDateStart?.nextWeek;
 
     await updateSchedule(currentDateStart, currentDateEnd);
   }

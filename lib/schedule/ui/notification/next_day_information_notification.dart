@@ -40,9 +40,8 @@ class NextDayInformationNotification extends TaskCallback {
     if (nextScheduleEntry == null) return;
 
     final format = DateFormat.Hm();
-    final daysToNextEntry = toStartOfDay(nextScheduleEntry.start)!
-        .difference(toStartOfDay(now)!)
-        .inDays;
+    final daysToNextEntry =
+        nextScheduleEntry.start.startOfDay.difference(now.startOfDay).inDays;
 
     if (daysToNextEntry > 1) return;
 
@@ -89,7 +88,7 @@ class NextDayInformationNotification extends TaskCallback {
 
   @override
   Future<void> schedule() async {
-    final nextSchedule = toTimeOfDayInFuture(DateTime.now(), 20, 00);
+    final nextSchedule = DateTime.now().toTimeOfDayInFuture(20, 00);
     await _scheduler.scheduleOneShotTaskAt(
       nextSchedule,
       "NextDayInformationNotification${DateFormat.yMd().format(nextSchedule)}",
@@ -99,7 +98,7 @@ class NextDayInformationNotification extends TaskCallback {
 
   @override
   Future<void> cancel() async {
-    final nextSchedule = toTimeOfDayInFuture(DateTime.now(), 20, 00);
+    final nextSchedule = DateTime.now().toTimeOfDayInFuture(20, 00);
     await _scheduler.cancelTask(
       "NextDayInformationNotification${DateFormat.yMd().format(nextSchedule)}",
     );

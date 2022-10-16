@@ -22,8 +22,8 @@ class BackgroundScheduleUpdate extends TaskCallback {
       return;
     }
 
-    final today = toDayOfWeek(toStartOfDay(DateTime.now()), DateTime.monday)!;
-    final end = addDays(today, 7 * 3)!;
+    final today = DateTime.now().startOfDay.toDayOfWeek(DateTime.monday);
+    final end = today.addDays(7 * 3);
 
     final cancellationToken = CancellationToken();
 

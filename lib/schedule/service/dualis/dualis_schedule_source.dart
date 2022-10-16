@@ -16,13 +16,13 @@ class DualisScheduleSource extends ScheduleSource {
 
   @override
   Future<ScheduleQueryResult> querySchedule(
-    DateTime? from,
-    DateTime? to, [
+    DateTime from,
+    DateTime to, [
     CancellationToken? cancellationToken,
   ]) async {
     cancellationToken ??= CancellationToken();
 
-    DateTime current = toStartOfMonth(from)!;
+    DateTime current = from.startOfMonth;
 
     var schedule = const Schedule();
     final allErrors = <ParseError>[];
@@ -31,7 +31,7 @@ class DualisScheduleSource extends ScheduleSource {
       await _dualisScraper.loginWithPreviousCredentials(cancellationToken);
     }
 
-    while (to!.isAfter(current) && !cancellationToken.isCancelled) {
+    while (to.isAfter(current) && !cancellationToken.isCancelled) {
       try {
         final monthSchedule = await _dualisScraper.loadMonthlySchedule(
           current,
@@ -48,7 +48,7 @@ class DualisScheduleSource extends ScheduleSource {
         throw ScheduleQueryFailedException(e, trace);
       }
 
-      current = toNextMonth(current);
+      current = current.nextMonth;
     }
 
     cancellationToken.throwIfCancelled();

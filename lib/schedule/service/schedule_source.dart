@@ -12,8 +12,8 @@ abstract class ScheduleSource {
   /// if an error happened or the operation was cancelled
   ///
   Future<ScheduleQueryResult?> querySchedule(
-    DateTime? from,
-    DateTime? to, [
+    DateTime from,
+    DateTime to, [
     CancellationToken? cancellationToken,
   ]);
 

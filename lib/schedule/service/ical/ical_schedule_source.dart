@@ -21,8 +21,8 @@ class IcalScheduleSource extends ScheduleSource {
 
   @override
   Future<ScheduleQueryResult?> querySchedule(
-    DateTime? from,
-    DateTime? to, [
+    DateTime from,
+    DateTime to, [
     CancellationToken? cancellationToken,
   ]) async {
     final response = await _makeRequest(_url, cancellationToken!);

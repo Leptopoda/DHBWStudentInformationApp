@@ -17,11 +17,11 @@ class RaplaScheduleSource extends ScheduleSource {
 
   @override
   Future<ScheduleQueryResult> querySchedule(
-    DateTime? from,
-    DateTime? to, [
+    DateTime from,
+    DateTime to, [
     CancellationToken? cancellationToken,
   ]) async {
-    DateTime current = toDayOfWeek(from, DateTime.monday)!;
+    DateTime current = from.toDayOfWeek(DateTime.monday);
 
     cancellationToken ??= CancellationToken();
 
@@ -30,7 +30,7 @@ class RaplaScheduleSource extends ScheduleSource {
 
     var didChangeMonth = false;
 
-    while ((to!.isAfter(current) && !cancellationToken.isCancelled) ||
+    while ((to.isAfter(current) && !cancellationToken.isCancelled) ||
         didChangeMonth) {
       try {
         final weekSchedule =
@@ -52,7 +52,7 @@ class RaplaScheduleSource extends ScheduleSource {
       }
 
       final currentMonth = current.month;
-      current = toNextWeek(current)!;
+      current = current.nextWeek;
       final nextMonth = current.month;
 
       // Some rapla instances only return the dates in the current month.
@@ -214,7 +214,7 @@ class RaplaScheduleSource extends ScheduleSource {
 enum FailureReason {
   Success,
   RequestError,
-  ParseError,
+  ParseError;
 }
 
 // TODO: [Leptopoda] make enum

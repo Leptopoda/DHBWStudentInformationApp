@@ -123,7 +123,7 @@ class DateManagementPage extends StatelessWidget {
                   ),
                   // When the date entry has a time of 00:00 don't show it.
                   // It means the date entry is for the whole day
-                  if (isAtMidnight(dateEntry.start))
+                  if (dateEntry.start.isAtMidnight)
                     Container()
                   else
                     Padding(

@@ -26,8 +26,7 @@ class DailyScheduleViewModel extends BaseViewModel {
   Schedule get schedule => _daySchedule ??= const Schedule();
 
   Future loadScheduleForToday() async {
-    final now = DateTime.now();
-    currentDate = toStartOfDay(now);
+    currentDate = DateTime.now().startOfDay;
 
     await updateSchedule();
   }
@@ -39,22 +38,22 @@ class DailyScheduleViewModel extends BaseViewModel {
   Future _updateScheduleFromCache() async {
     schedule = await scheduleProvider.getCachedSchedule(
       currentDate!,
-      tomorrow(currentDate)!,
+      currentDate!.tomorrow,
     );
   }
 
   Future<void> _scheduleUpdatedCallback(
     Schedule schedule,
-    DateTime? start,
-    DateTime? end,
+    DateTime start,
+    DateTime end,
   ) async {
-    start = toStartOfDay(start);
-    end = toStartOfDay(tomorrow(end));
+    start = start.startOfDay;
+    end = end.tomorrow.startOfDay;
 
-    if (!(start!.isAfter(currentDate!) || end!.isBefore(currentDate!))) {
+    if (!(start.isAfter(currentDate!) || end.isBefore(currentDate!))) {
       schedule = schedule.trim(
-        toStartOfDay(currentDate),
-        toStartOfDay(tomorrow(currentDate)),
+        currentDate?.startOfDay,
+        currentDate?.tomorrow.startOfDay,
       );
     }
   }

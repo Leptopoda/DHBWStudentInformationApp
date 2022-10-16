@@ -1,110 +1,97 @@
-// TODO: [Leptopoda] write extension methods directly on [DateTime]
+extension DateTimeExtension on DateTime {
+  DateTime get startOfDay {
+    return DateTime(year, month, day);
+  }
 
-DateTime? toStartOfDay(DateTime? dateTime) {
-  return dateTime == null
-      ? null
-      : DateTime(dateTime.year, dateTime.month, dateTime.day);
-}
+  DateTime get startOfMonth {
+    return DateTime(year, month);
+  }
 
-DateTime? toStartOfMonth(DateTime? dateTime) {
-  return dateTime == null ? null : DateTime(dateTime.year, dateTime.month);
-}
+  DateTime get tomorrow {
+    return addDays(1);
+  }
 
-DateTime? tomorrow(DateTime? dateTime) {
-  return addDays(dateTime, 1);
-}
+  DateTime addDays(int days) {
+    return DateTime(
+      year,
+      month,
+      day + days,
+      hour,
+      minute,
+      second,
+    );
+  }
 
-DateTime? addDays(DateTime? dateTime, int days) {
-  return dateTime == null
-      ? null
-      : DateTime(
-          dateTime.year,
-          dateTime.month,
-          dateTime.day + days,
-          dateTime.hour,
-          dateTime.minute,
-          dateTime.second,
-        );
-}
+  DateTime get monday {
+    return subtract(Duration(days: weekday - 1));
+  }
 
-DateTime toMonday(DateTime dateTime) {
-  return dateTime.subtract(Duration(days: dateTime.weekday - 1));
-}
+  DateTime get previousWeek {
+    return DateTime(
+      year,
+      month,
+      day - 7,
+      hour,
+      minute,
+      second,
+    );
+  }
 
-DateTime? toPreviousWeek(DateTime? dateTime) {
-  return dateTime == null
-      ? null
-      : DateTime(
-          dateTime.year,
-          dateTime.month,
-          dateTime.day - 7,
-          dateTime.hour,
-          dateTime.minute,
-          dateTime.second,
-        );
-}
+  DateTime get nextWeek {
+    return DateTime(
+      year,
+      month,
+      day + 7,
+      hour,
+      minute,
+      second,
+    );
+  }
 
-DateTime? toNextWeek(DateTime? dateTime) {
-  return dateTime == null
-      ? null
-      : DateTime(
-          dateTime.year,
-          dateTime.month,
-          dateTime.day + 7,
-          dateTime.hour,
-          dateTime.minute,
-          dateTime.second,
-        );
-}
+  DateTime get nextMonth {
+    return DateTime(
+      year,
+      month + 1,
+      day,
+      hour,
+      minute,
+      second,
+    );
+  }
 
-DateTime toNextMonth(DateTime dateTime) {
-  return DateTime(
-    dateTime.year,
-    dateTime.month + 1,
-    dateTime.day,
-    dateTime.hour,
-    dateTime.minute,
-    dateTime.second,
-  );
-}
+  DateTime toTimeOfDay(int hour, int minute) {
+    return DateTime(
+      year,
+      month,
+      day,
+      hour,
+      minute,
+    );
+  }
 
-DateTime toTimeOfDay(DateTime dateTime, int hour, int minute) {
-  return DateTime(
-    dateTime.year,
-    dateTime.month,
-    dateTime.day,
-    hour,
-    minute,
-  );
-}
+  DateTime toTimeOfDayInFuture(int hour, int minute) {
+    final newDateTime = DateTime(
+      year,
+      month,
+      day,
+      hour,
+      minute,
+    );
 
-DateTime toTimeOfDayInFuture(DateTime dateTime, int hour, int minute) {
-  var newDateTime = DateTime(
-    dateTime.year,
-    dateTime.month,
-    dateTime.day,
-    hour,
-    minute,
-  );
+    if (isAfter(newDateTime)) return newDateTime.tomorrow;
 
-  if (dateTime.isAfter(newDateTime)) newDateTime = tomorrow(newDateTime)!;
+    return newDateTime;
+  }
 
-  return newDateTime;
-}
+  bool isAtSameDay(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
 
-bool isAtSameDay(DateTime date1, DateTime date2) {
-  return date1.year == date2.year &&
-      date1.month == date2.month &&
-      date1.day == date2.day;
-}
+  DateTime toDayOfWeek(int weekday) {
+    return addDays(-weekday).addDays(weekday);
+  }
 
-DateTime? toDayOfWeek(DateTime? dateTime, int weekday) {
-  if (dateTime == null) return null;
-
-  final startOfWeek = addDays(dateTime, -dateTime.weekday);
-  return addDays(startOfWeek, weekday);
-}
-
-bool isAtMidnight(DateTime dateTime) {
-  return dateTime.hour == 0 && dateTime.minute == 0;
+  bool get isAtMidnight {
+    return hour == 0 && minute == 0;
+  }
 }

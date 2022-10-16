@@ -81,7 +81,7 @@ class CalendarAccess {
     DateTime start;
     DateTime end;
     if (entry.start.isAtSameMomentAs(entry.end)) {
-      isAllDay = isAtMidnight(entry.start);
+      isAllDay = entry.start.isAtMidnight;
       start = entry.start;
       end = isAllDay ? start : start.add(const Duration(minutes: 30));
     } else {

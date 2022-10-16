@@ -59,7 +59,7 @@ class DateDetailBottomSheet extends StatelessWidget {
                           softWrap: true,
                           style: Theme.of(context).textTheme.subtitle2,
                         ),
-                        if (isAtMidnight(dateEntry.start))
+                        if (dateEntry.start.isAtMidnight)
                           Container()
                         else
                           Text(

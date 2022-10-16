@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:dhbwstudentapp/common/i18n/localizations.dart';
 import 'package:dhbwstudentapp/common/ui/widgets/error_display.dart';
+import 'package:dhbwstudentapp/schedule/model/schedule.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_entry.dart';
 import 'package:dhbwstudentapp/schedule/ui/viewmodels/weekly_schedule_view_model.dart';
 import 'package:dhbwstudentapp/schedule/ui/weeklyschedule/schedule_entry_detail_bottom_sheet.dart';
@@ -132,7 +133,8 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                                 key: ValueKey(
                                   model.currentDateStart!.toIso8601String(),
                                 ),
-                                schedule: model.weekSchedule,
+                                schedule:
+                                    model.weekSchedule ?? const Schedule(),
                                 displayStart: model.clippedDateStart ??
                                     model.currentDateStart,
                                 displayEnd: model.clippedDateEnd ??
@@ -140,7 +142,6 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                                 onScheduleEntryTap: (entry) {
                                   _onScheduleEntryTap(context, entry);
                                 },
-                                now: model.now,
                                 displayEndHour: model.displayEndHour,
                                 displayStartHour: model.displayStartHour,
                               ),

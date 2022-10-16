@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SchedulePastOverlay extends CustomPaint {
-  final DateTime? fromDate;
-  final DateTime? toDate;
-  final DateTime? now;
-  final int? fromHour;
-  final int? toHour;
+  final DateTime fromDate;
+  final DateTime toDate;
+  final int fromHour;
+  final int toHour;
   final int columns;
   final Color overlayColor;
 
@@ -19,13 +18,12 @@ class SchedulePastOverlay extends CustomPaint {
     this.overlayColor,
     this.fromDate,
     this.toDate,
-    this.now,
     this.columns,
   ) : super(
           painter: SchedulePastOverlayCustomPaint(
-            toStartOfDay(fromDate),
-            tomorrow(toStartOfDay(toDate)),
-            now,
+            fromDate.startOfDay,
+            toDate.startOfDay.tomorrow,
+            DateTime.now(),
             fromHour,
             toHour,
             columns,
@@ -35,11 +33,11 @@ class SchedulePastOverlay extends CustomPaint {
 }
 
 class SchedulePastOverlayCustomPaint extends CustomPainter {
-  final DateTime? fromDate;
-  final DateTime? toDate;
-  final DateTime? now;
-  final int? fromHour;
-  final int? toHour;
+  final DateTime fromDate;
+  final DateTime toDate;
+  final DateTime now;
+  final int fromHour;
+  final int toHour;
   final int columns;
   final Color overlayColor;
 
@@ -59,9 +57,9 @@ class SchedulePastOverlayCustomPaint extends CustomPainter {
       ..color = overlayColor
       ..strokeWidth = 1;
 
-    if (now!.isBefore(toDate!) && now!.isAfter(fromDate!)) {
+    if (now.isBefore(toDate) && now.isAfter(fromDate)) {
       drawPartialPastOverlay(canvas, size, overlayPaint);
-    } else if (now!.isAfter(toDate!)) {
+    } else if (now.isAfter(toDate)) {
       drawCompletePastOverlay(canvas, size, overlayPaint);
     }
   }
@@ -79,7 +77,7 @@ class SchedulePastOverlayCustomPaint extends CustomPainter {
   }
 
   void drawPartialPastOverlay(Canvas canvas, Size size, Paint overlayPaint) {
-    final difference = now!.difference(fromDate!);
+    final difference = now.difference(fromDate);
     final differenceInDays = (difference.inHours / 24).floor();
     final dayWidth = size.width / columns;
 
@@ -94,9 +92,9 @@ class SchedulePastOverlayCustomPaint extends CustomPainter {
     );
 
     final leftoverMinutes =
-        difference.inMinutes - (differenceInDays * 24 * 60) - (60 * fromHour!);
+        difference.inMinutes - (differenceInDays * 24 * 60) - (60 * fromHour);
 
-    final displayedMinutes = (toHour! - fromHour!) * 60;
+    final displayedMinutes = (toHour - fromHour) * 60;
     final leftoverHeight = leftoverMinutes * (size.height / displayedMinutes);
 
     if (leftoverHeight > 0) {

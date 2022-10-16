@@ -19,8 +19,8 @@ class IsolateScheduleSourceDecorator extends ScheduleSource {
 
   @override
   Future<ScheduleQueryResult?> querySchedule(
-    DateTime? from,
-    DateTime? to, [
+    DateTime from,
+    DateTime to, [
     CancellationToken? cancellationToken,
   ]) async {
     await _initializeIsolate();
@@ -112,7 +112,10 @@ Future<void> _executeQueryScheduleMessage(
     final DateTime? from = map["from"] as DateTime?;
     final DateTime? to = map["to"] as DateTime?;
 
-    final result = await source.querySchedule(from, to, token);
+    ScheduleQueryResult? result;
+    if (from != null && to != null) {
+      result = await source.querySchedule(from, to, token);
+    }
 
     sendPort.send(result);
   } on OperationCancelledException catch (_) {
