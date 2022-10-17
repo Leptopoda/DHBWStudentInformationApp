@@ -57,10 +57,8 @@ class SelectThemeDialog {
       ),
       actions: [
         TextButton(
+          onPressed: Navigator.of(context).pop,
           child: Text(L.of(context).dialogOk.toUpperCase()),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
         ),
       ],
     );

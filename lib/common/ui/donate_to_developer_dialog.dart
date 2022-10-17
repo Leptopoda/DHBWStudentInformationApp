@@ -75,17 +75,15 @@ class DonateToDeveloperDialog {
       buttonPadding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
       children: <Widget>[
         TextButton(
-          child: Text(L.of(context).donateDialogPositiveButton.toUpperCase()),
           onPressed: () {
             Navigator.of(context).pop();
             KiwiContainer().resolve<InAppPurchaseManager>().donate();
           },
+          child: Text(L.of(context).donateDialogPositiveButton.toUpperCase()),
         ),
         TextButton(
+          onPressed: Navigator.of(context).pop,
           child: Text(L.of(context).donateDialogNegativeButton.toUpperCase()),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
         ),
       ],
     );

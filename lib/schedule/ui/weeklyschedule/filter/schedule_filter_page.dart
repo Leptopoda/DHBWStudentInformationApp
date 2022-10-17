@@ -80,7 +80,7 @@ class FilterStateRow extends StatefulWidget {
 }
 
 class _FilterStateRowState extends State<FilterStateRow> {
-  bool? isChecked = false;
+  bool isChecked = false;
 
   _FilterStateRowState();
 
@@ -96,6 +96,7 @@ class _FilterStateRowState extends State<FilterStateRow> {
     return CheckboxListTile(
       value: isChecked,
       onChanged: (checked) {
+        if (checked == null) return;
         setState(() {
           isChecked = checked;
           widget.filterState.isDisplayed = isChecked;

@@ -100,7 +100,7 @@ class OnboardingViewModel extends BaseViewModel {
       await pages[step]!.viewModel().save();
     }
 
-    _onboardingFinished.call();
+    _onboardingFinished();
 
     await analytics.logTutorialComplete();
     await analytics.setUserProperty(name: "onboarding_finished", value: "true");

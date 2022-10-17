@@ -36,7 +36,7 @@ class FilterViewModel extends BaseViewModel {
 
   Future<void> applyFilter() async {
     final allFilteredNames = filterStates
-        .where((element) => !element.isDisplayed!)
+        .where((element) => !element.isDisplayed)
         .map((e) => e.entryName)
         .toList();
 
@@ -47,7 +47,7 @@ class FilterViewModel extends BaseViewModel {
 }
 
 class ScheduleEntryFilterState {
-  bool? isDisplayed;
+  bool isDisplayed;
   final String? entryName;
 
   ScheduleEntryFilterState(this.isDisplayed, this.entryName);

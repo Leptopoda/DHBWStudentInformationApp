@@ -95,10 +95,8 @@ abstract class EnterUrlDialog {
   List<Widget> _buildButtons(BuildContext context) {
     return <Widget>[
       TextButton(
+        onPressed: Navigator.of(context).pop,
         child: Text(L.of(context).dialogCancel.toUpperCase()),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
       ),
       ListenableProvider.value(
         value: _hasUrlError,

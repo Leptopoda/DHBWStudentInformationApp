@@ -41,7 +41,6 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                 L.of(context).scheduleQueryFailedOpenInBrowser.toUpperCase(),
               ),
               onPressed: () {
-                // TDOD: [Leptopoda] this can throw a null error
                 launchUrl(Uri.parse(viewModel.scheduleUrl!));
               },
             )

@@ -59,11 +59,9 @@ class _DateFilterOptionsState extends State<DateFilterOptions> {
               minWidth: 36,
               child: IconButton(
                 icon: const Icon(Icons.tune),
-                onPressed: () {
-                  setState(() {
-                    _isExpanded = true;
-                  });
-                },
+                onPressed: () => setState(() {
+                  _isExpanded = true;
+                }),
               ),
             ),
           ),

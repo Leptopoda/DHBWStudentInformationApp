@@ -65,9 +65,7 @@ class RaplaUrlPage extends StatelessWidget {
                         ),
                       ),
                       TextButton.icon(
-                        onPressed: () async {
-                          await viewModel?.pasteUrl();
-                        },
+                        onPressed: viewModel?.pasteUrl,
                         icon: const Icon(Icons.content_paste),
                         label: Text(
                           L.of(context).onboardingRaplaUrlPaste.toUpperCase(),

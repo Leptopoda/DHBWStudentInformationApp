@@ -57,10 +57,8 @@ class WidgetHelpDialog {
       buttonPadding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
       children: <Widget>[
         TextButton(
+          onPressed: Navigator.of(context).pop,
           child: Text(L.of(context).dialogOk.toUpperCase()),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
         ),
       ],
     );

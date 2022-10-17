@@ -16,7 +16,7 @@ class DualisUrls {
 
   DualisUrls();
 
-  Map<String, String?> semesterCourseResultUrls = {};
+  final Map<String, String?> semesterCourseResultUrls = {};
 }
 
 class DualisSemester {
