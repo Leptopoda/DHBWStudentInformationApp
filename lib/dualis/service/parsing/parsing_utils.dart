@@ -33,10 +33,7 @@ Element getElementByClassName(
   return list[index];
 }
 
-Element getElementById(
-  Document document,
-  String id,
-) {
+Element getElementById(Document document, String id) {
   final element = document.getElementById(id);
 
   if (element == null) throw ElementNotFoundParseException(id);

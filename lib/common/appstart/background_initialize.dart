@@ -44,7 +44,7 @@ class BackgroundInitialize {
 
       KiwiContainer().registerInstance(
         task,
-        name: task.getName(),
+        name: task.name,
       );
 
       await task.schedule();

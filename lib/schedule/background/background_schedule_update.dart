@@ -43,19 +43,17 @@ class BackgroundScheduleUpdate extends TaskCallback {
 
   @override
   Future<void> cancel() async {
-    await scheduler.cancelTask(getName());
+    await scheduler.cancelTask(name);
   }
 
   @override
   Future<void> schedule() async {
     await scheduler.schedulePeriodic(
       const Duration(hours: 4),
-      getName(),
+      name,
     );
   }
 
   @override
-  String getName() {
-    return "BackgroundScheduleUpdate";
-  }
+  String get name => "BackgroundScheduleUpdate";
 }

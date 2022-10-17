@@ -10,5 +10,5 @@ abstract class TaskCallback {
 
   Future<void> cancel();
 
-  String getName();
+  String get name => throw UnimplementedError();
 }

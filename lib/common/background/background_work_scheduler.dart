@@ -95,7 +95,7 @@ class BackgroundWorkScheduler extends WorkSchedulerService {
   ///
   @override
   void registerTask(TaskCallback task) {
-    _taskCallbacks[task.getName()] = task;
+    _taskCallbacks[task.name] = task;
   }
 
   @override

@@ -88,8 +88,8 @@ class WeeklyScheduleViewModel extends BaseViewModel {
     currentDateEnd = end;
 
     if (weekSchedule != null) {
-      final scheduleStart = weekSchedule!.getStartDate();
-      final scheduleEnd = weekSchedule!.getEndDate();
+      final scheduleStart = weekSchedule!.startDate;
+      final scheduleEnd = weekSchedule!.endDate;
 
       if (scheduleStart == null && scheduleEnd == null) {
         clippedDateStart = start.toDayOfWeek(DateTime.monday);
@@ -103,10 +103,10 @@ class WeeklyScheduleViewModel extends BaseViewModel {
         clippedDateEnd = scheduleEnd;
       }
 
-      displayStartHour = weekSchedule?.getStartTime()?.hour ?? 23;
+      displayStartHour = weekSchedule?.startTime?.hour ?? 23;
       displayStartHour = min(7, displayStartHour);
 
-      displayEndHour = weekSchedule?.getEndTime()?.hour ?? 0;
+      displayEndHour = weekSchedule?.endTime?.hour ?? 0;
       displayEndHour = max(displayEndHour + 1, 17);
     } else {
       clippedDateStart = currentDateStart?.toDayOfWeek(DateTime.monday);

@@ -51,7 +51,7 @@ class Schedule {
     return schedule;
   }
 
-  DateTime? getStartDate() {
+  DateTime? get startDate {
     if (entries.isEmpty) return null;
 
     final date = entries.reduce((ScheduleEntry? a, ScheduleEntry? b) {
@@ -61,7 +61,7 @@ class Schedule {
     return date;
   }
 
-  DateTime? getEndDate() {
+  DateTime? get endDate {
     if (entries.isEmpty) return null;
 
     final date = entries.reduce((ScheduleEntry? a, ScheduleEntry? b) {
@@ -71,7 +71,7 @@ class Schedule {
     return date;
   }
 
-  DateTime? getStartTime() {
+  DateTime? get startTime {
     DateTime? earliestTime;
 
     for (final entry in entries) {
@@ -94,7 +94,7 @@ class Schedule {
     return earliestTime;
   }
 
-  DateTime? getEndTime() {
+  DateTime? get endTime {
     DateTime? latestTime;
 
     for (final entry in entries) {

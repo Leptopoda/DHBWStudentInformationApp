@@ -105,9 +105,7 @@ class NextDayInformationNotification extends TaskCallback {
   }
 
   @override
-  String getName() {
-    return name;
-  }
+  String get name => nameProp;
 
-  static String get name => "NextDayInformationNotification";
+  static const nameProp = "NextDayInformationNotification";
 }
