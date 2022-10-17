@@ -223,7 +223,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> requestCalendarPermission() async {
     final permission = await CalendarAccess().requestCalendarPermission();
-    if (permission == CalendarPermission.permissionDenied) {
+    if (permission == CalendarPermission.denied) {
       await showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(

@@ -1,5 +1,6 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dhbwstudentapp/common/data/epoch_date_time_converter.dart';
+import 'package:dhbwstudentapp/common/i18n/localizations.dart';
 import 'package:dhbwstudentapp/common/ui/schedule_entry_theme.dart';
 import 'package:dhbwstudentapp/dualis/service/parsing/parsing_utils.dart';
 import 'package:equatable/equatable.dart';
@@ -30,6 +31,21 @@ enum ScheduleEntryType {
         return scheduleEntryTheme.online;
       case ScheduleEntryType.unknown:
         return scheduleEntryTheme.unknown;
+    }
+  }
+
+  String text(BuildContext c) {
+    switch (this) {
+      case ScheduleEntryType.publicHoliday:
+        return L.of(c).scheduleEntryTypePublicHoliday;
+      case ScheduleEntryType.lesson:
+        return L.of(c).scheduleEntryTypeClass;
+      case ScheduleEntryType.exam:
+        return L.of(c).scheduleEntryTypeExam;
+      case ScheduleEntryType.online:
+        return L.of(c).scheduleEntryTypeOnline;
+      case ScheduleEntryType.unknown:
+        return L.of(c).scheduleEntryTypeUnknown;
     }
   }
 }

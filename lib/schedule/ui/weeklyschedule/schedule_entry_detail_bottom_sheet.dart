@@ -1,6 +1,5 @@
 import 'package:dhbwstudentapp/common/i18n/localizations.dart';
 import 'package:dhbwstudentapp/common/ui/app_theme.dart';
-import 'package:dhbwstudentapp/common/ui/schedule_entry_type_mappings.dart';
 import 'package:dhbwstudentapp/common/ui/text_theme.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_entry.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +18,6 @@ class ScheduleEntryDetailBottomSheet extends StatelessWidget {
     final formatter = DateFormat.Hm(L.of(context).locale.languageCode);
     final timeStart = formatter.format(scheduleEntry.start);
     final timeEnd = formatter.format(scheduleEntry.end);
-
-    final typeString =
-        scheduleEntryTypeToReadableString(context, scheduleEntry.type);
 
     final textTheme = Theme.of(context).textTheme;
     final customTextThme = Theme.of(context).extension<CustomTextTheme>();
@@ -109,7 +105,7 @@ class ScheduleEntryDetailBottomSheet extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    typeString,
+                    scheduleEntry.type.text(context),
                     style: scheduleEntryBottomPageType,
                   ),
                 ],

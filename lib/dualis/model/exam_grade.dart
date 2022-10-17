@@ -1,28 +1,30 @@
-enum ExamGradeState {
+import 'package:dhbwstudentapp/common/i18n/localizations.dart';
+import 'package:flutter/widgets.dart';
+
+enum _ExamGradeState {
   notGraded,
   graded,
   passed,
   failed,
 }
 
-// TODO: [leptopoda] implement into the enum
 class ExamGrade {
-  final ExamGradeState state;
-  final String? gradeValue;
+  final _ExamGradeState _state;
+  final String? _gradeValue;
 
   const ExamGrade.failed()
-      : state = ExamGradeState.failed,
-        gradeValue = "";
+      : _state = _ExamGradeState.failed,
+        _gradeValue = null;
 
   const ExamGrade.notGraded()
-      : state = ExamGradeState.notGraded,
-        gradeValue = "";
+      : _state = _ExamGradeState.notGraded,
+        _gradeValue = null;
 
   const ExamGrade.passed()
-      : state = ExamGradeState.passed,
-        gradeValue = "";
+      : _state = _ExamGradeState.passed,
+        _gradeValue = null;
 
-  ExamGrade.graded(this.gradeValue) : state = ExamGradeState.graded;
+  ExamGrade.graded(this._gradeValue) : _state = _ExamGradeState.graded;
 
   factory ExamGrade.fromString(String? grade) {
     if (grade == "noch nicht gesetzt" || grade == "") {
@@ -39,5 +41,18 @@ class ExamGrade {
     //}
 
     return ExamGrade.graded(grade);
+  }
+
+  String getText(BuildContext context) {
+    switch (_state) {
+      case _ExamGradeState.notGraded:
+        return "";
+      case _ExamGradeState.graded:
+        return _gradeValue!;
+      case _ExamGradeState.passed:
+        return L.of(context).examPassed;
+      case _ExamGradeState.failed:
+        return L.of(context).examNotPassed;
+    }
   }
 }

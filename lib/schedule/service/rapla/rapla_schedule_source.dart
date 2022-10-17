@@ -210,32 +210,3 @@ class RaplaScheduleSource extends ScheduleSource {
     return false;
   }
 }
-
-enum FailureReason {
-  success,
-  requestError,
-  parseError;
-}
-
-// TODO: [Leptopoda] make enum
-class ScheduleOrFailure {
-  final FailureReason reason;
-  final Schedule? schedule;
-  final Object? exception;
-  final StackTrace? trace;
-
-  bool get success => reason == FailureReason.success;
-
-  const ScheduleOrFailure.success(this.schedule)
-      : reason = FailureReason.success,
-        exception = null,
-        trace = null;
-
-  const ScheduleOrFailure.failParseError(this.exception, this.trace)
-      : reason = FailureReason.parseError,
-        schedule = null;
-
-  const ScheduleOrFailure.failRequestError(this.exception, this.trace)
-      : reason = FailureReason.requestError,
-        schedule = null;
-}

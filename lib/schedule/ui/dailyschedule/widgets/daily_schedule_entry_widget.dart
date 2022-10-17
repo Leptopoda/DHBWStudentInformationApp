@@ -1,6 +1,5 @@
 import 'package:dhbwstudentapp/common/i18n/localizations.dart';
 import 'package:dhbwstudentapp/common/ui/app_theme.dart';
-import 'package:dhbwstudentapp/common/ui/schedule_entry_type_mappings.dart';
 import 'package:dhbwstudentapp/common/ui/text_theme.dart';
 import 'package:dhbwstudentapp/schedule/model/schedule_entry.dart';
 import 'package:flutter/material.dart';
@@ -81,10 +80,7 @@ class DailyScheduleEntryWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.subtitle2,
                             ),
                             Text(
-                              scheduleEntryTypeToReadableString(
-                                context,
-                                scheduleEntry.type,
-                              ),
+                              scheduleEntry.type.text(context),
                               style: textTheme.bodyText2?.merge(
                                 customTextThme.dailyScheduleEntryType,
                               ),
