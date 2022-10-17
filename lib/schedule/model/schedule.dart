@@ -36,12 +36,11 @@ class Schedule {
     return copyWith(entries: allEntries);
   }
 
-  // TODO: [Leptopoda] improve nullability
-  Schedule trim(DateTime? startDate, DateTime? endDate) {
+  Schedule trim(DateTime startDate, DateTime endDate) {
     final newList = <ScheduleEntry>[];
 
     for (final entry in entries) {
-      if (startDate!.isBefore(entry.end) && endDate!.isAfter(entry.start)) {
+      if (startDate.isBefore(entry.end) && endDate.isAfter(entry.start)) {
         newList.add(entry);
       }
     }

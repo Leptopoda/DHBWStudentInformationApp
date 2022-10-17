@@ -39,7 +39,7 @@ class DailySchedulePage extends StatelessWidget {
                       L.of(context).locale.languageCode,
                     );
                     return Text(
-                      dateFormat.format(model!.currentDate!),
+                      dateFormat.format(model!.currentDate),
                       style: dailyScheduleEntryTitle,
                     );
                   },

@@ -88,7 +88,6 @@ class SelectMannheimCourseWidget extends StatelessWidget {
     int index,
     BuildContext context,
   ) {
-    // TODO: [Leptopoda] why is nullsafety garanttueed here but checked above ¿?
     final isSelected = viewModel.selectedCourse == viewModel.courses![index];
 
     return ListTile(

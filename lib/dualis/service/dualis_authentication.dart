@@ -30,8 +30,8 @@ class DualisAuthentication {
   Session? _session;
   Session get session => _session ??= Session();
 
-  LoginResult? _loginState;
-  LoginResult get loginState => _loginState ??= LoginResult.loggedOut;
+  LoginResult _loginState = LoginResult.loggedOut;
+  LoginResult get loginState => _loginState;
 
   Future<LoginResult> login(
     Credentials credentials,
@@ -47,8 +47,7 @@ class DualisAuthentication {
     if (loginResponse == null ||
         loginResponse.statusCode != 200 ||
         !loginResponse.headers.containsKey("refresh")) {
-      _loginState = LoginResult.loginFailed;
-      return loginState;
+      return _loginState = LoginResult.loginFailed;
     }
 
     // TODO: Test for login failed page
@@ -59,8 +58,7 @@ class DualisAuthentication {
     );
 
     if (redirectUrl == null) {
-      _loginState = LoginResult.loginFailed;
-      return loginState;
+      return _loginState = LoginResult.loginFailed;
     }
 
     final redirectPage = await session.get(
@@ -74,8 +72,7 @@ class DualisAuthentication {
     );
 
     if (dualisUrls.mainPageUrl == null) {
-      _loginState = LoginResult.loginFailed;
-      return loginState;
+      return _loginState = LoginResult.loginFailed;
     }
 
     _updateAccessToken(dualisUrls.mainPageUrl!);
@@ -91,8 +88,7 @@ class DualisAuthentication {
       dualisEndpoint,
     );
 
-    _loginState = LoginResult.loggedIn;
-    return loginState;
+    return _loginState = LoginResult.loggedIn;
   }
 
   Future<Response?> _makeLoginRequest(
