@@ -3,15 +3,14 @@ import 'package:dhbwstudentapp/common/data/preferences/preferences_provider.dart
 import 'package:dhbwstudentapp/common/ui/viewmodels/base_view_model.dart';
 import 'package:dhbwstudentapp/date_management/data/calendar_access.dart';
 import 'package:dhbwstudentapp/date_management/model/date_entry.dart';
-
-typedef OnPermissionDenied = Function();
+import 'package:flutter/animation.dart';
 
 class CalendarExportViewModel extends BaseViewModel {
   final CalendarAccess calendarAccess;
   final PreferencesProvider preferencesProvider;
   final List<DateEntry> _entriesToExport;
 
-  OnPermissionDenied? _onPermissionDenied;
+  VoidCallback? _onPermissionDenied;
 
   List<Calendar>? _calendars;
   List<Calendar> get calendars => _calendars ??= [];
@@ -81,7 +80,7 @@ class CalendarExportViewModel extends BaseViewModel {
     }
   }
 
-  set onPermissionDeniedCallback(OnPermissionDenied function) {
+  set onPermissionDeniedCallback(VoidCallback function) {
     _onPermissionDenied = function;
   }
 }

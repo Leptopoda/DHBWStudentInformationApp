@@ -1,32 +1,17 @@
 import 'package:dhbwstudentapp/common/i18n/localizations.dart';
 import 'package:dhbwstudentapp/dualis/model/credentials.dart';
+import 'package:dhbwstudentapp/dualis/ui/viewmodels/study_grades_view_model.dart';
 import 'package:flutter/material.dart';
-
-typedef OnLogin = Future<bool> Function(Credentials credentials);
-typedef OnLoadCredentials = Future<Credentials?> Function();
-typedef OnSaveCredentials = Future<void> Function(Credentials credentials);
-typedef OnClearCredentials = Future<void> Function();
-typedef GetDoSaveCredentials = Future<bool> Function();
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
-  final OnLogin onLogin;
-  final OnLoadCredentials onLoadCredentials;
-  final OnSaveCredentials onSaveCredentials;
-  final OnClearCredentials onClearCredentials;
-  final GetDoSaveCredentials getDoSaveCredentials;
-
   final Widget title;
   final String loginFailedText;
 
   const LoginForm({
     super.key,
-    required this.onLogin,
     required this.title,
     required this.loginFailedText,
-    required this.onLoadCredentials,
-    required this.onSaveCredentials,
-    required this.onClearCredentials,
-    required this.getDoSaveCredentials,
   });
 
   @override
@@ -41,26 +26,26 @@ class _LoginFormState extends State<LoginForm> {
   final CredentialsEditingController _controller =
       CredentialsEditingController();
 
+  late StudyGradesViewModel model;
+
   _LoginFormState();
 
   @override
-  void initState() {
-    super.initState();
+  Future<void> didChangeDependencies() async {
+    model = Provider.of<StudyGradesViewModel>(context);
 
-    widget.getDoSaveCredentials().then((value) {
-      setState(() {
-        _storeCredentials = value;
-      });
+    _storeCredentials = await model.getDoSaveCredentials();
 
-      widget.onLoadCredentials().then((credentials) {
-        if (credentials != null) {
-          _controller.credentials = credentials;
-          if (mounted) {
-            setState(() {});
-          }
-        }
-      });
-    });
+    final credentials = await model.loadCredentials();
+    if (credentials != null) {
+      _controller.credentials = credentials;
+    }
+
+    if (mounted) {
+      setState(() {});
+    }
+
+    super.didChangeDependencies();
   }
 
   @override
@@ -107,9 +92,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             onChanged: (bool? value) {
               if (value == null) return;
-              setState(() {
-                _storeCredentials = value;
-              });
+              setState(() => _storeCredentials = value);
             },
             value: _storeCredentials,
           ),
@@ -142,15 +125,15 @@ class _LoginFormState extends State<LoginForm> {
     });
 
     if (!_storeCredentials) {
-      await widget.onClearCredentials();
+      await model.clearCredentials();
     }
 
     final credentials = _controller.credentials;
 
-    final bool loginSuccess = await widget.onLogin(credentials);
+    final bool loginSuccess = await model.login(credentials);
 
     if (loginSuccess && _storeCredentials) {
-      await widget.onSaveCredentials(credentials);
+      await model.saveCredentials(credentials);
     }
 
     setState(() {

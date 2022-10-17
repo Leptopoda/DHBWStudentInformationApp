@@ -2,12 +2,11 @@ import 'package:dhbwstudentapp/common/data/preferences/preferences_provider.dart
 import 'package:dhbwstudentapp/common/logging/analytics.dart';
 import 'package:dhbwstudentapp/common/ui/viewmodels/base_view_model.dart';
 import 'package:dhbwstudentapp/ui/onboarding/onboardin_step.dart';
-
-typedef OnboardingFinished = void Function();
+import 'package:flutter/foundation.dart';
 
 class OnboardingViewModel extends BaseViewModel {
   final PreferencesProvider preferencesProvider;
-  final OnboardingFinished _onboardingFinished;
+  final VoidCallback _onboardingFinished;
 
   final List<String> steps = [
     "selectSource",

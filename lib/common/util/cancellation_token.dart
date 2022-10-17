@@ -1,8 +1,8 @@
-typedef CancellationCallback = void Function();
+import 'package:flutter/animation.dart';
 
 class CancellationToken {
   bool _isCancelled = false;
-  CancellationCallback? _callback;
+  VoidCallback? _callback;
 
   CancellationToken([this._callback]);
 
@@ -20,7 +20,7 @@ class CancellationToken {
     _callback?.call();
   }
 
-  set cancellationCallback(CancellationCallback? callback) {
+  set cancellationCallback(VoidCallback? callback) {
     _callback = callback;
   }
 }
