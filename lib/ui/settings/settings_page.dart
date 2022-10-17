@@ -39,7 +39,8 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final SettingsViewModel settingsViewModel = SettingsViewModel(
     KiwiContainer().resolve(),
-    KiwiContainer().resolve<TaskCallback>(NextDayInformationNotification.nameProp)
+    KiwiContainer()
+            .resolve<TaskCallback>(NextDayInformationNotification.nameProp)
         as NextDayInformationNotification,
     KiwiContainer().resolve(),
     KiwiContainer().resolve(),

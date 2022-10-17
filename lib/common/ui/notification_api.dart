@@ -21,19 +21,15 @@ class NotificationApi {
       'outline_event_note_24',
     );
 
-    final initializationSettingsIOS = IOSInitializationSettings(
-      // TODO: [Leptopoda] the below always returns null so why register it?
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-    );
+    const initializationSettingsIOS = IOSInitializationSettings();
 
-    final initializationSettings = InitializationSettings(
+    const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
 
     await _localNotificationsPlugin.initialize(
       initializationSettings,
-      onSelectNotification: selectNotification,
     );
   }
 
@@ -70,16 +66,6 @@ class NotificationApi {
       payload: "",
     );
   }
-
-  Future onDidReceiveLocalNotification(
-    int id,
-    String? title,
-    String? body,
-    String? payload,
-  ) =>
-      Future.value();
-
-  Future selectNotification(String? payload) => Future.value();
 }
 
 ///
@@ -93,27 +79,8 @@ class VoidNotificationApi implements NotificationApi {
       throw UnimplementedError();
 
   @override
-  Future<void> initialize() {
-    return Future.value();
-  }
+  Future<void> initialize() async {}
 
   @override
-  Future onDidReceiveLocalNotification(
-    int id,
-    String? title,
-    String? body,
-    String? payload,
-  ) {
-    return Future.value();
-  }
-
-  @override
-  Future selectNotification(String? payload) {
-    return Future.value();
-  }
-
-  @override
-  Future showNotification(String title, String? message, [int? id]) {
-    return Future.value();
-  }
+  Future showNotification(String title, String? message, [int? id]) async {}
 }

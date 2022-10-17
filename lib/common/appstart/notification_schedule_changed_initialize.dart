@@ -27,7 +27,5 @@ class NotificationScheduleChangedInitialize {
       KiwiContainer().resolve(),
     );
     notification.showNotification(scheduleDiff);
-
-    return Future.value();
   }
 }

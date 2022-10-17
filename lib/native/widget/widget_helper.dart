@@ -59,22 +59,16 @@ class VoidWidgetHelper implements WidgetHelper {
   const VoidWidgetHelper();
 
   @override
-  Future<void> disableWidget() {
-    return Future.value();
-  }
+  Future<void> disableWidget() async {}
 
   @override
-  Future<void> enableWidget() {
-    return Future.value();
-  }
+  Future<void> enableWidget() async {}
 
   @override
-  Future<void> requestWidgetRefresh() {
-    return Future.value();
-  }
+  Future<void> requestWidgetRefresh() async {}
 
   @override
-  Future<bool> areWidgetsSupported() {
-    return Future.value(false);
+  Future<bool> areWidgetsSupported() async {
+    return false;
   }
 }

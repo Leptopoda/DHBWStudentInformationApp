@@ -10,12 +10,14 @@ class VoidBackgroundWorkScheduler extends WorkSchedulerService {
   }
 
   @override
-  Future<void> scheduleOneShotTaskIn(Duration delay, String id, String name) {
+  Future<void> scheduleOneShotTaskIn(
+    Duration delay,
+    String id,
+    String name,
+  ) async {
     print(
       "Did not schedule one shot task: $id. With a delay of ${delay.inMinutes} minutes.",
     );
-
-    return Future.value();
   }
 
   @override
@@ -28,10 +30,8 @@ class VoidBackgroundWorkScheduler extends WorkSchedulerService {
   }
 
   @override
-  Future<void> cancelTask(String id) {
+  Future<void> cancelTask(String id) async {
     print("Cancelled task $id");
-
-    return Future.value();
   }
 
   @override
@@ -39,21 +39,17 @@ class VoidBackgroundWorkScheduler extends WorkSchedulerService {
     Duration delay,
     String id, [
     bool needsNetwork = false,
-  ]) {
+  ]) async {
     print(
       "Did not schedule periodic task: $id. With a delay of ${delay.inMinutes} minutes. Requires network: $needsNetwork",
     );
-
-    return Future.value();
   }
 
   @override
   void registerTask(TaskCallback task) {}
 
   @override
-  Future<void> executeTask(String id) {
-    return Future.value();
-  }
+  Future<void> executeTask(String id) async {}
 
   @override
   bool isSchedulingAvailable() {

@@ -133,10 +133,7 @@ class InAppPurchaseHelper {
     print("Completing purchase: ${item.transactionId} (${item.productId})");
 
     try {
-      await FlutterInappPurchase.instance.finishTransaction(
-        item,
-        isConsumable: _isConsumable(item.productId),
-      );
+      await FlutterInappPurchase.instance.finishTransaction(item);
 
       await _preferencesProvider.set(
         "purchase_${item.productId}_finished",
@@ -220,11 +217,6 @@ class InAppPurchaseHelper {
     print(event?.debugMessage);
 
     _purchaseCallback?.call(null, PurchaseResultEnum.error);
-  }
-
-  // TODO: [Leptopdoa] remove this¿?
-  bool _isConsumable(String? id) {
-    return false;
   }
 
   bool _isPurchased(PurchasedItem item) {
