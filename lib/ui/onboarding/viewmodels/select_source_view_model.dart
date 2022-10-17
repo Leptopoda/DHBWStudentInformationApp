@@ -26,20 +26,17 @@ class SelectSourceViewModel extends OnboardingStepViewModel {
     await _preferencesProvider.setScheduleSourceType(scheduleSourceType);
   }
 
-  String? nextStep() {
+  String nextStep() {
     switch (_scheduleSourceType) {
       case ScheduleSourceType.rapla:
         return "rapla";
-      case ScheduleSourceType.dualis:
-        return "dualis";
-      case ScheduleSourceType.none:
-        return "dualis";
       case ScheduleSourceType.mannheim:
         return "mannheim";
       case ScheduleSourceType.ical:
         return "ical";
-      default:
-        return null;
+      case ScheduleSourceType.dualis:
+      case ScheduleSourceType.none:
+        return "dualis";
     }
   }
 }

@@ -35,7 +35,7 @@ class SelectSourceOnboardingStep extends OnboardingStep {
   }
 
   @override
-  String? nextStep() {
+  String nextStep() {
     return _viewModel.nextStep();
   }
 

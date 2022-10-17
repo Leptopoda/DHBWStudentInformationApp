@@ -76,10 +76,7 @@ class DatabaseAccess {
   }) async {
     final Database db = await _database;
 
-    // TODO: [Leptopoda] is there a reason this is done? or at maybe use whereArgs.removeWhere()
-    for (int i = 0; i < (whereArgs?.length ?? 0); i++) {
-      whereArgs![i] = whereArgs[i] ?? "";
-    }
+    whereArgs?.removeWhere((element) => element == null);
 
     return db.query(
       table,
